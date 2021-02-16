@@ -1,0 +1,36 @@
+# Default values for kubedb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+kubedb-crds:
+  enabled: true
+kubedb-community:
+  enabled: true
+  license: ""
+kubedb-catalog:
+  enabled: false
+  catalog:
+    elasticsearch: true
+    etcd: false
+    memcached: false
+    mongo: true
+    mysql: false
+    mariadb: false
+    perconaxtradb: false
+    pgbouncer: false
+    postgres: false
+    proxysql: false
+    redis: false
+kubedb-enterprise:
+  enabled: true
+  license: ""
+kubedb-autoscaler:
+  enabled: true
+  license: ""
+stash-community:
+  enabled: true
+  license: ""
+stash-mongodb:
+  enabled: true
+stash-elasticsearch:
+  enabled: true
