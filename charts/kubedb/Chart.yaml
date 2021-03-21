@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubedb
 description: 'KubeDB by AppsCode - Production ready databases on Kubernetes'
 type: application
-version: v0.1.0
-appVersion: v0.1.0
+version: v2021.03.17
+appVersion: v2021.03.17
 home: https://kubedb.com
 icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
 sources:
@@ -12,35 +12,27 @@ maintainers:
 - name: appscode
   email: support@appscode.com
 dependencies:
-- name: kubedb-crds
-  version: v0.16.2
-  repository: file://../kubedb-crds
-  condition: kubedb-crds.enabled
-- name: kubedb-community
-  version: v0.16.2
-  repository: https://charts.appscode.com/stable
-  condition: kubedb-community.enabled
 - name: kubedb-catalog
-  version: v0.16.2
-  repository: https://charts.appscode.com/stable
+  repository: https://charts.appscode.com/stable/
+  version: v0.17.1
   condition: kubedb-catalog.enabled
+- name: kubedb-community
+  repository: https://charts.appscode.com/stable/
+  version: v0.17.1
+  condition: kubedb-community.enabled
 - name: kubedb-enterprise
-  version: v0.3.2
-  repository: https://charts.appscode.com/stable
+  repository: https://charts.appscode.com/stable/
+  version: v0.4.1
   condition: kubedb-enterprise.enabled
 - name: kubedb-autoscaler
-  version: v0.1.2
-  repository: https://charts.appscode.com/stable
+  repository: https://charts.appscode.com/stable/
+  version: v0.2.1
   condition: kubedb-autoscaler.enabled
 - name: stash-community
-  version: v0.11.9
-  repository: https://charts.appscode.com/stable
+  repository: https://charts.appscode.com/stable/
+  version: v0.12.0
   condition: stash-community.enabled
-- name: stash-mongodb
-  version: 4.0.11-v5
-  repository: https://charts.appscode.com/stable
-  condition: stash-mongodb.enabled
-- name: stash-elasticsearch
-  version: 7.3.2-v6
-  repository: https://charts.appscode.com/stable
-  condition: stash-elasticsearch.enabled
+- name: stash-catalog
+  repository: https://charts.appscode.com/stable/
+  version: v0.12.0
+  condition: stash-catalog.enabled

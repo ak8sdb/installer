@@ -2,13 +2,35 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-kubedb-crds:
-  enabled: true
-kubedb-community:
-  enabled: true
+global:
+  # License for the product.
+  # Get a license by following the steps from [here](https://kubedb.com/docs/latest/setup/install/enterprise#get-a-trial-license).
+  # Example:
+  # helm install appscode/kubedb \
+  #   --set-file global.license=/path/to/license/file
+  # or
+  # helm install appscode/kubedb \
+  #   --set global.license=<license file content>
   license: ""
+
+  # Docker registry used to pull KubeDB operator image
+  registry: ""
+
+  # Specify an array of imagePullSecrets.
+  # Secrets must be manually created in the namespace.
+  #
+  # Example:
+  # helm template charts/kubedb \
+  #   --set global.imagePullSecrets[0].name=sec0 \
+  #   --set global.imagePullSecrets[1].name=sec1
+  imagePullSecrets: []
+
+  # Skip generating cleaner job YAML
+  skipCleaner: false
+
 kubedb-catalog:
-  enabled: false
+  # If enabled, installs the kubedb-catalog chart
+  enabled: true
   catalog:
     elasticsearch: true
     etcd: false
@@ -21,16 +43,58 @@ kubedb-catalog:
     postgres: false
     proxysql: false
     redis: false
+kubedb-community:
+  # If enabled, installs the kubedb-community chart
+  enabled: true
+  operator:
+    # Docker registry used to pull KubeDB enterprise operator image
+    registry: ghcr.io/ak8sdb
+    # KubeDB enterprise operator container image tag
+    tag: v2021.03.17
 kubedb-enterprise:
+  # If enabled, installs the kubedb-enterprise chart
   enabled: true
-  license: ""
+  operator:
+    # Docker registry used to pull KubeDB enterprise operator image
+    registry: ghcr.io/ak8sdb
+    # KubeDB enterprise operator container image tag
+    tag: v2021.03.17
 kubedb-autoscaler:
+  # If enabled, installs the kubedb-autoscaler chart
   enabled: true
-  license: ""
+  operator:
+    # Docker registry used to pull KubeDB enterprise operator image
+    registry: ghcr.io/ak8sdb
+    # KubeDB enterprise operator container image tag
+    tag: v2021.03.17
+
 stash-community:
+  # If enabled, installs the stash-community chart
   enabled: true
-  license: ""
-stash-mongodb:
+  operator:
+    # Docker registry used to pull operator image
+    registry: ghcr.io/ak8sdb
+    # Operator container image tag
+    tag: v2021.03.17
+
+stash-catalog:
+  # If enabled, installs the stash-catalog chart
   enabled: true
-stash-elasticsearch:
-  enabled: true
+  elasticsearch:
+    # If true, deploys Elasticsearch addon
+    enabled: true
+  mariadb:
+    # If true, deploys MariaDB addon
+    enabled: false
+  mongodb:
+    # If true, deploys MongoDB addon
+    enabled: true
+  mysql:
+    # If true, deploys MySQL addon
+    enabled: false
+  perconaxtradb:
+    # If true, deploys Percona XtraDB addon
+    enabled: false
+  postgres:
+    # If true, deploys PostgreSQL addon
+    enabled: false

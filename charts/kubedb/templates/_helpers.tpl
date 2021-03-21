@@ -60,3 +60,77 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Returns the appscode license
+*/}}
+{{- define "appscode.license" -}}
+{{- default .Values.global.license .Values.license }}
+{{- end }}
+
+{{/*
+Returns the registry used for operator docker image
+*/}}
+{{- define "operator.registry" -}}
+{{- default .Values.operator.registry .Values.global.registry }}
+{{- end }}
+
+{{/*
+Returns the registry used for catalog docker images
+*/}}
+{{- define "catalog.registry" -}}
+{{- default .Values.image.registry .Values.global.registry }}
+{{- end }}
+
+{{/*
+Returns the registry used for official docker images
+*/}}
+{{- define "official.registry" -}}
+{{- if .image.overrideOfficialRegistry -}}
+{{- $reg := default .image.registry .global.registry -}}
+{{- list $reg (last .officialRegistry) | join "/" }}
+{{- else -}}
+{{- .officialRegistry | join "/" }}
+{{- end }}
+{{- end }}
+
+{{/*
+Returns the registry used for cleaner docker image
+*/}}
+{{- define "cleaner.registry" -}}
+{{- default .Values.cleaner.registry .Values.global.registry }}
+{{- end }}
+
+{{/*
+Returns whether the cleaner job YAML will be generated or not
+*/}}
+{{- define "cleaner.generate" -}}
+{{- ternary "false" "true" (or .Values.global.skipCleaner .Values.cleaner.skip) -}}
+{{- end }}
+
+{{/*
+Returns the appscode image pull secrets
+*/}}
+{{- define "appscode.imagePullSecrets" -}}
+{{- with .Values.global.imagePullSecrets -}}
+imagePullSecrets:
+{{- toYaml . | nindent 2 }}
+{{- else -}}
+imagePullSecrets:
+{{- toYaml $.Values.imagePullSecrets | nindent 2 }}
+{{- end }}
+{{- end }}
+
+{{- define "image-pull-secrets" -}}
+{{- $secrets:= list -}}
+{{- with .Values.global.imagePullSecrets -}}
+{{- range $x := . -}}
+{{- $secrets = append $secrets $x.name -}}
+{{- end -}}
+{{- else -}}
+{{- range $x := $.Values.imagePullSecrets -}}
+{{- $secrets = append $secrets $x.name -}}
+{{- end -}}
+{{- end }}
+{{- $secrets | join "," | print -}}
+{{- end -}}
