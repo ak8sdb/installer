@@ -1,0 +1,57 @@
+apiVersion: v1
+entries:
+  kubedb:
+  - apiVersion: v2
+    appVersion: v2021.03.17
+    created: "2021-03-21T18:04:18.192253391-07:00"
+    dependencies:
+    - condition: kubedb-catalog.enabled
+      name: kubedb-catalog
+      repository: https://charts.appscode.com/stable/
+      version: v0.17.1
+    - condition: kubedb-community.enabled
+      name: kubedb-community
+      repository: https://charts.appscode.com/stable/
+      version: v0.17.1
+    - condition: kubedb-enterprise.enabled
+      name: kubedb-enterprise
+      repository: https://charts.appscode.com/stable/
+      version: v0.4.1
+    - condition: kubedb-autoscaler.enabled
+      name: kubedb-autoscaler
+      repository: https://charts.appscode.com/stable/
+      version: v0.2.1
+    - condition: stash-community.enabled
+      name: stash-community
+      repository: https://charts.appscode.com/stable/
+      version: v0.12.0
+    - condition: stash-catalog.enabled
+      name: stash-catalog
+      repository: https://charts.appscode.com/stable/
+      version: v0.12.0
+    description: KubeDB by AppsCode - Production ready databases on Kubernetes
+    digest: 541bea965057868b27fd41278b9098f68f7cfef98159b17e8f16d85a524f8c40
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb
+    sources:
+    - https://github.com/kubedb
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb/kubedb-v2021.03.17.tgz
+    version: v2021.03.17
+  kubedb-crds:
+  - apiVersion: v2
+    appVersion: v2021.03.17
+    created: "2021-03-21T18:04:18.201442753-07:00"
+    description: KubeDB and Stash crds
+    digest: c64f83f813607851d58519d07468362ab50673b1603ee2fa7c83a1ba168df686
+    name: kubedb-crds
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-crds/kubedb-crds-v2021.03.17.tgz
+    version: v2021.03.17
+generated: "2021-03-21T18:04:18.179171129-07:00"
