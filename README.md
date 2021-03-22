@@ -1,17 +1,5 @@
 # installer
 
-## Import CRDs
-
-```bash
-./hack/scripts/import-crds.sh
-```
-
-## Update Helm Chart Repository
-
-```bash
-./hack/scripts/update-repo.sh
-```
-
 ## How to install
 
 ```bash
@@ -45,4 +33,16 @@ kubedb-kubedb-autoscaler-c47888f7-lnv7c     1/1     Running   0          2m6s
 kubedb-kubedb-community-68d767957b-flgmz    1/1     Running   0          2m6s
 kubedb-kubedb-enterprise-556868cfd8-hzckm   1/1     Running   0          2m6s
 kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
+```
+
+## Import CRDs
+
+```bash
+./hack/scripts/import-crds.sh
+```
+
+## Update Helm Chart Repository
+
+```bash
+./hack/scripts/update-repo.sh
 ```
