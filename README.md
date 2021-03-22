@@ -11,7 +11,9 @@ NAME                      	CHART VERSION	APP VERSION 	DESCRIPTION
 ak8sdb/kubedb             	v2021.03.17  	v2021.03.17 	KubeDB by AppsCode - Production ready databases...
 ak8sdb/kubedb-crds        	v2021.03.17  	v2021.03.17 	KubeDB and Stash crds
 
-$ helm install kubedb ak8sdb/kubedb
+$ helm install kubedb ak8sdb/kubedb \
+  --set-file global.license=/path/to/license.txt
+
 NAME: kubedb
 LAST DEPLOYED: Sun Mar 21 18:09:41 2021
 NAMESPACE: default
