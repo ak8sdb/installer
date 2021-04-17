@@ -50,7 +50,7 @@ kubedb-community:
     # Docker registry used to pull KubeDB enterprise operator image
     registry: ghcr.io/ak8sdb
     # KubeDB enterprise operator container image tag
-    tag: v2021.03.17
+    tag: v2021.04.16
 kubedb-enterprise:
   # If enabled, installs the kubedb-enterprise chart
   enabled: true
@@ -58,7 +58,7 @@ kubedb-enterprise:
     # Docker registry used to pull KubeDB enterprise operator image
     registry: ghcr.io/ak8sdb
     # KubeDB enterprise operator container image tag
-    tag: v2021.03.17
+    tag: v2021.04.16
 kubedb-autoscaler:
   # If enabled, installs the kubedb-autoscaler chart
   enabled: true
@@ -66,7 +66,7 @@ kubedb-autoscaler:
     # Docker registry used to pull KubeDB enterprise operator image
     registry: ghcr.io/ak8sdb
     # KubeDB enterprise operator container image tag
-    tag: v2021.03.17
+    tag: v2021.04.16
 
 stash-community:
   # If enabled, installs the stash-community chart
@@ -75,7 +75,7 @@ stash-community:
     # Docker registry used to pull operator image
     registry: ghcr.io/ak8sdb
     # Operator container image tag
-    tag: v2021.03.17
+    tag: v2021.04.12
 
 stash-catalog:
   # If enabled, installs the stash-catalog chart
