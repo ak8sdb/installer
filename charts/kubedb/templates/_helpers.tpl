@@ -72,14 +72,14 @@ Returns the appscode license
 Returns the registry used for operator docker image
 */}}
 {{- define "operator.registry" -}}
-{{- default .Values.operator.registry .Values.global.registry }}
+{{- list (default .Values.registryFQDN .Values.global.registryFQDN) (default .Values.operator.registry .Values.global.registry) | compact | join "/" }}
 {{- end }}
 
 {{/*
 Returns the registry used for catalog docker images
 */}}
 {{- define "catalog.registry" -}}
-{{- default .Values.image.registry .Values.global.registry }}
+{{- list (default .Values.registryFQDN .Values.global.registryFQDN) (default .Values.image.registry .Values.global.registry) | compact | join "/" }}
 {{- end }}
 
 {{/*
@@ -87,10 +87,9 @@ Returns the registry used for official docker images
 */}}
 {{- define "official.registry" -}}
 {{- if .image.overrideOfficialRegistry -}}
-{{- $reg := default .image.registry .global.registry -}}
-{{- list $reg (last .officialRegistry) | join "/" }}
+{{- list (default .registryFQDN .global.registryFQDN) (default .image.registry .global.registry) (last .officialRegistry) | compact | join "/" }}
 {{- else -}}
-{{- .officialRegistry | join "/" }}
+{{- prepend .officialRegistry (default .registryFQDN .global.registryFQDN) | compact | join "/" }}
 {{- end }}
 {{- end }}
 
@@ -98,7 +97,7 @@ Returns the registry used for official docker images
 Returns the registry used for cleaner docker image
 */}}
 {{- define "cleaner.registry" -}}
-{{- default .Values.cleaner.registry .Values.global.registry }}
+{{- list (default .Values.registryFQDN .Values.global.registryFQDN) (default .Values.cleaner.registry .Values.global.registry) | compact | join "/" }}
 {{- end }}
 
 {{/*
@@ -106,6 +105,35 @@ Returns whether the cleaner job YAML will be generated or not
 */}}
 {{- define "cleaner.generate" -}}
 {{- ternary "false" "true" (or .Values.global.skipCleaner .Values.cleaner.skip) -}}
+{{- end }}
+
+{{/*
+Returns the enabled monitoring agent name
+*/}}
+{{- define "monitoring.agent" -}}
+{{- if (default .Values.global.monitoring.enabled .Values.monitoring.enabled) -}}
+{{- default .Values.global.monitoring.agent .Values.monitoring.agent }}
+{{- end }}
+{{- end }}
+
+{{/*
+Returns whether the ServiceMonitor will be labeled with custom label
+*/}}
+{{- define "monitoring.apply-servicemonitor-label" -}}
+{{- ternary "false" "true" (and (empty .Values.global.monitoring.serviceMonitor.labels) (empty .Values.monitoring.serviceMonitor.labels) ) -}}
+{{- end }}
+
+{{/*
+Returns the ServiceMonitor labels
+*/}}
+{{- define "monitoring.servicemonitor-label" -}}
+{{- range $key, $val := .Values.monitoring.serviceMonitor.labels }}
+{{ $key }}: {{ $val }}
+{{- else }}
+{{- range $key, $val := .Values.global.monitoring.serviceMonitor.labels }}
+{{ $key }}: {{ $val }}
+{{- end }}
+{{- end }}
 {{- end }}
 
 {{/*

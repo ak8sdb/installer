@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubedb
 description: 'KubeDB by AppsCode - Production ready databases on Kubernetes'
 type: application
-version: v2021.04.16
-appVersion: v2021.04.16
+version: v2021.06.23
+appVersion: v2021.06.23
 home: https://kubedb.com
 icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
 sources:
@@ -14,25 +14,25 @@ maintainers:
 dependencies:
 - name: kubedb-catalog
   repository: https://charts.appscode.com/stable/
-  version: v2021.04.16
+  version: v2021.06.23
   condition: kubedb-catalog.enabled
 - name: kubedb-community
   repository: https://charts.appscode.com/stable/
-  version: v0.18.0
+  version: v0.19.0
   condition: kubedb-community.enabled
 - name: kubedb-enterprise
   repository: https://charts.appscode.com/stable/
-  version: v0.5.0
+  version: v0.6.0
   condition: kubedb-enterprise.enabled
 - name: kubedb-autoscaler
   repository: https://charts.appscode.com/stable/
-  version: v0.3.0
+  version: v0.4.0
   condition: kubedb-autoscaler.enabled
 - name: stash-community
   repository: https://charts.appscode.com/stable/
-  version: v0.12.3
+  version: v0.14.1
   condition: stash-community.enabled
 - name: stash-catalog
   repository: https://charts.appscode.com/stable/
-  version: v2021.04.12
+  version: v2021.06.23
   condition: stash-catalog.enabled
