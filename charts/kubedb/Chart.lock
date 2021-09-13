@@ -1,21 +1,21 @@
 dependencies:
 - name: kubedb-catalog
   repository: https://charts.appscode.com/stable/
-  version: v2021.06.23
+  version: v2021.09.09
 - name: kubedb-community
   repository: https://charts.appscode.com/stable/
-  version: v0.19.0
+  version: v0.21.0
 - name: kubedb-enterprise
   repository: https://charts.appscode.com/stable/
-  version: v0.6.0
+  version: v0.8.0
 - name: kubedb-autoscaler
   repository: https://charts.appscode.com/stable/
-  version: v0.4.0
+  version: v0.6.0
 - name: stash-community
   repository: https://charts.appscode.com/stable/
-  version: v0.14.1
+  version: v0.15.0
 - name: stash-catalog
   repository: https://charts.appscode.com/stable/
-  version: v2021.06.23
-digest: sha256:2488a88e7e45fb6965dfe472156db3a15f007bfda2f66452d29be34f52ce6642
-generated: "2021-07-01T21:14:28.239918603-07:00"
+  version: v2021.08.02
+digest: sha256:6707e2ae216757b307d54889f242122f373d2e686a9baf5397a2c1d120ecd7b9
+generated: "2021-09-22T14:53:59.482996495-07:00"
