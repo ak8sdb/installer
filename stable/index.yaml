@@ -2,6 +2,48 @@ apiVersion: v1
 entries:
   kubedb:
   - apiVersion: v2
+    appVersion: v2021.09.09
+    created: "2021-09-22T14:45:38.50826442-07:00"
+    dependencies:
+    - condition: kubedb-catalog.enabled
+      name: kubedb-catalog
+      repository: https://charts.appscode.com/stable/
+      version: v2021.09.09
+    - condition: kubedb-community.enabled
+      name: kubedb-community
+      repository: https://charts.appscode.com/stable/
+      version: v0.21.0
+    - condition: kubedb-enterprise.enabled
+      name: kubedb-enterprise
+      repository: https://charts.appscode.com/stable/
+      version: v0.8.0
+    - condition: kubedb-autoscaler.enabled
+      name: kubedb-autoscaler
+      repository: https://charts.appscode.com/stable/
+      version: v0.6.0
+    - condition: stash-community.enabled
+      name: stash-community
+      repository: https://charts.appscode.com/stable/
+      version: v0.14.1
+    - condition: stash-catalog.enabled
+      name: stash-catalog
+      repository: https://charts.appscode.com/stable/
+      version: v2021.06.23
+    description: KubeDB by AppsCode - Production ready databases on Kubernetes
+    digest: 2fb418b36a19a513228cf575a246ae51d80bfca786d1f0fd5af34b3bc702cbbd
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb
+    sources:
+    - https://github.com/kubedb
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb/kubedb-v2021.09.09.tgz
+    version: v2021.09.09
+  - apiVersion: v2
     appVersion: v2021.06.23
     created: "2021-07-01T21:31:48.02101994-07:00"
     dependencies:
@@ -129,6 +171,16 @@ entries:
     version: v2021.03.17
   kubedb-crds:
   - apiVersion: v2
+    appVersion: v2021.09.09
+    created: "2021-09-22T14:45:38.516243406-07:00"
+    description: KubeDB and Stash crds
+    digest: 198b99285bdceb9b79c3a2921845580aec37255be20520a8eb6c77710e9a6db7
+    name: kubedb-crds
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-crds/kubedb-crds-v2021.09.09.tgz
+    version: v2021.09.09
+  - apiVersion: v2
     appVersion: v2021.06.23
     created: "2021-07-01T21:31:48.029125459-07:00"
     description: KubeDB and Stash crds
@@ -158,4 +210,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-crds/kubedb-crds-v2021.03.17.tgz
     version: v2021.03.17
-generated: "2021-07-01T21:31:48.006509791-07:00"
+generated: "2021-09-22T14:45:38.48915252-07:00"

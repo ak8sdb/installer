@@ -8,8 +8,8 @@ $ helm repo update
 
 $ helm search repo kubedb
 NAME                      	CHART VERSION	APP VERSION 	DESCRIPTION
-ak8sdb/kubedb             	v2021.06.23  	v2021.06.23 	KubeDB by AppsCode - Production ready databases...
-ak8sdb/kubedb-crds        	v2021.06.23  	v2021.06.23 	KubeDB and Stash crds
+ak8sdb/kubedb             	v2021.09.09  	v2021.09.09 	KubeDB by AppsCode - Production ready databases...
+ak8sdb/kubedb-crds        	v2021.09.09  	v2021.09.09 	KubeDB and Stash crds
 
 $ helm install kubedb ak8sdb/kubedb \
   --set-file global.license=/path/to/license.txt
@@ -27,7 +27,7 @@ Get the KubeDB operator pods by running the following command:
 
 $ helm ls
 NAME  	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
-kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2021.06.23	v2021.06.23
+kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2021.09.09	v2021.09.09
 
 $ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS   AGE
