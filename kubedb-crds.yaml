@@ -867,6 +867,7 @@ spec:
                 - OpenDistro
                 - SearchGuard
                 - X-Pack
+                - OpenSearch
                 type: string
               db:
                 properties:
@@ -882,6 +883,7 @@ spec:
                 - ElasticStack
                 - OpenDistro
                 - SearchGuard
+                - OpenSearch
                 - KubeDB
                 type: string
               exporter:
@@ -1040,8 +1042,10 @@ spec:
                 type: boolean
               distribution:
                 enum:
-                - MongoDB
+                - Official
                 - Percona
+                - KubeDB
+                - MongoDB
                 type: string
               exporter:
                 properties:
@@ -2113,10 +2117,18 @@ spec:
                         additionalProperties:
                           type: string
                         type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        type: object
                     type: object
                   metadata:
                     properties:
                       annotations:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      labels:
                         additionalProperties:
                           type: string
                         type: object
@@ -3588,6 +3600,10 @@ spec:
                     metadata:
                       properties:
                         annotations:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        labels:
                           additionalProperties:
                             type: string
                           type: object
@@ -5115,6 +5131,17 @@ spec:
                         type: object
                     type: object
                 type: object
+              ephemeralStorage:
+                properties:
+                  medium:
+                    type: string
+                  sizeLimit:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                type: object
               halted:
                 type: boolean
               init:
@@ -5984,10 +6011,18 @@ spec:
                         additionalProperties:
                           type: string
                         type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        type: object
                     type: object
                   metadata:
                     properties:
                       annotations:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      labels:
                         additionalProperties:
                           type: string
                         type: object
@@ -7439,6 +7474,10 @@ spec:
                           additionalProperties:
                             type: string
                           type: object
+                        labels:
+                          additionalProperties:
+                            type: string
+                          type: object
                       type: object
                     spec:
                       properties:
@@ -7499,6 +7538,17 @@ spec:
                           name:
                             type: string
                         type: object
+                      ephemeralStorage:
+                        properties:
+                          medium:
+                            type: string
+                          sizeLimit:
+                            anyOf:
+                            - type: integer
+                            - type: string
+                            pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                            x-kubernetes-int-or-string: true
+                        type: object
                       podTemplate:
                         properties:
                           controller:
@@ -7507,10 +7557,18 @@ spec:
                                 additionalProperties:
                                   type: string
                                 type: object
+                              labels:
+                                additionalProperties:
+                                  type: string
+                                type: object
                             type: object
                           metadata:
                             properties:
                               annotations:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              labels:
                                 additionalProperties:
                                   type: string
                                 type: object
@@ -9027,10 +9085,18 @@ spec:
                                 additionalProperties:
                                   type: string
                                 type: object
+                              labels:
+                                additionalProperties:
+                                  type: string
+                                type: object
                             type: object
                           metadata:
                             properties:
                               annotations:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              labels:
                                 additionalProperties:
                                   type: string
                                 type: object
@@ -10472,6 +10538,17 @@ spec:
                           name:
                             type: string
                         type: object
+                      ephemeralStorage:
+                        properties:
+                          medium:
+                            type: string
+                          sizeLimit:
+                            anyOf:
+                            - type: integer
+                            - type: string
+                            pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                            x-kubernetes-int-or-string: true
+                        type: object
                       podTemplate:
                         properties:
                           controller:
@@ -10480,10 +10557,18 @@ spec:
                                 additionalProperties:
                                   type: string
                                 type: object
+                              labels:
+                                additionalProperties:
+                                  type: string
+                                type: object
                             type: object
                           metadata:
                             properties:
                               annotations:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              labels:
                                 additionalProperties:
                                   type: string
                                 type: object
@@ -12278,6 +12363,25 @@ spec:
           spec:
             properties:
               configuration:
+                properties:
+                  applyConfig:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  configSecret:
+                    properties:
+                      name:
+                        type: string
+                    type: object
+                  removeCustomConfig:
+                    type: boolean
+                  removeSecureCustomConfig:
+                    type: boolean
+                  secureConfigSecret:
+                    properties:
+                      name:
+                        type: string
+                    type: object
                 type: object
               databaseRef:
                 properties:
@@ -12442,6 +12546,7 @@ spec:
                 - Restart
                 - Reconfigure
                 - ReconfigureTLS
+                - Reprovision
                 type: string
               upgrade:
                 properties:
@@ -12879,6 +12984,10 @@ spec:
                 properties:
                   configServer:
                     properties:
+                      applyConfig:
+                        additionalProperties:
+                          type: string
+                        type: object
                       configSecret:
                         properties:
                           name:
@@ -12891,6 +13000,10 @@ spec:
                     type: object
                   mongos:
                     properties:
+                      applyConfig:
+                        additionalProperties:
+                          type: string
+                        type: object
                       configSecret:
                         properties:
                           name:
@@ -12903,6 +13016,10 @@ spec:
                     type: object
                   replicaSet:
                     properties:
+                      applyConfig:
+                        additionalProperties:
+                          type: string
+                        type: object
                       configSecret:
                         properties:
                           name:
@@ -12915,6 +13032,10 @@ spec:
                     type: object
                   shard:
                     properties:
+                      applyConfig:
+                        additionalProperties:
+                          type: string
+                        type: object
                       configSecret:
                         properties:
                           name:
@@ -12927,6 +13048,10 @@ spec:
                     type: object
                   standalone:
                     properties:
+                      applyConfig:
+                        additionalProperties:
+                          type: string
+                        type: object
                       configSecret:
                         properties:
                           name:
@@ -12981,6 +13106,8 @@ spec:
                     format: int32
                     minimum: 0
                     type: integer
+                type: object
+              reprovision:
                 type: object
               restart:
                 type: object
@@ -13098,6 +13225,7 @@ spec:
                 - Restart
                 - Reconfigure
                 - ReconfigureTLS
+                - Reprovision
                 type: string
               upgrade:
                 properties:
@@ -13107,6 +13235,25 @@ spec:
               verticalScaling:
                 properties:
                   configServer:
+                    properties:
+                      limits:
+                        additionalProperties:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        type: object
+                      requests:
+                        additionalProperties:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        type: object
+                    type: object
+                  coordinator:
                     properties:
                       limits:
                         additionalProperties:
@@ -13229,6 +13376,12 @@ spec:
                     - type: string
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
+                  mode:
+                    default: Online
+                    enum:
+                    - Offline
+                    - Online
+                    type: string
                   replicaSet:
                     anyOf:
                     - type: integer
@@ -16064,6 +16217,12 @@ spec:
                       data in the repository. This will be used as `hostname` or will
                       be used to generate the `hostname` for the restic repository.
                     type: string
+                  args:
+                    description: Args specifies a list of arguments to pass to the
+                      backup driver.
+                    items:
+                      type: string
+                    type: array
                   exclude:
                     description: Exclude specifies a list of patterns for the files
                       to ignore during backup. Stash will ignore those files that
@@ -21913,6 +22072,12 @@ spec:
                       data in the repository. This will be used as `sourceHost` and
                       `targetHosts` or will be used to generate them.
                     type: string
+                  args:
+                    description: Args specifies a list of arguments to pass to the
+                      restore driver.
+                    items:
+                      type: string
+                    type: array
                   ref:
                     description: Ref refers to the restore,target
                     properties:
@@ -22472,6 +22637,7 @@ spec:
                       enum:
                       - Succeeded
                       - Failed
+                      - Running
                       - Unknown
                       type: string
                   type: object
