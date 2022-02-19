@@ -7,9 +7,13 @@ $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master
 $ helm repo update
 
 $ helm search repo kubedb
-NAME                      	CHART VERSION	APP VERSION 	DESCRIPTION
-ak8sdb/kubedb             	v2021.12.07  	v2021.12.07 	KubeDB by AppsCode - Production ready databases...
-ak8sdb/kubedb-crds        	v2021.12.07  	v2021.12.07 	KubeDB and Stash crds
+NAME                                CHART VERSION APP VERSION DESCRIPTION
+ak8sdb/kubedb                       v2022.02.22   v2022.02.22 KubeDB by AppsCode - Production ready databases...
+ak8sdb/kubedb-autoscaler            v2022.02.22   v2022.02.22 KubeDB Autoscaler by AppsCode - Autoscale KubeD...
+ak8sdb/kubedb-catalog               v2022.02.22   v2022.02.22 KubeDB Catalog by AppsCode - Catalog for databa...
+ak8sdb/kubedb-community             v2022.02.22   v2022.02.22 KubeDB Community by AppsCode - Community featur...
+ak8sdb/kubedb-crds                  v2022.02.22   v2022.02.22 KubeDB and Stash crds
+ak8sdb/kubedb-enterprise            v2022.02.22   v2022.02.22 KubeDB Enterprise by AppsCode - Enterprise feat...
 
 $ helm install kubedb ak8sdb/kubedb \
   --set-file global.license=/path/to/license.txt
@@ -27,7 +31,7 @@ Get the KubeDB operator pods by running the following command:
 
 $ helm ls
 NAME  	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
-kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2021.12.07	v2021.12.07
+kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2022.02.22	v2022.02.22
 
 $ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -46,5 +50,6 @@ kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
 ## Update Helm Chart Repository
 
 ```bash
+make update-charts
 ./hack/scripts/update-repo.sh
 ```

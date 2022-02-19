@@ -1,18 +1,18 @@
 project:
-  name: KubeDB Community by AppsCode
-  shortName: KubeDB Community
+  name: KubeDB CRDs
+  shortName: KubeDB CRDs
   url: https://github.com/kubedb
-  description: Community features for KubeDB by AppsCode
-  app: a KubeDB Community operator
+  description: KubeDB Custom Resource Definitions
+  app: KubeDB crds
 repository:
   url: https://raw.githubusercontent.com/ak8sdb/installer/master/stable
   name: ak8sdb
 chart:
-  name: kubedb-community
+  name: kubedb-crds
   values: -- generate from values file --
   valuesExample: -- generate from values file --
 prerequisites:
-- Kubernetes 1.14+
+- Kubernetes 1.16+
 release:
-  name: kubedb-community
+  name: kubedb-crds
   namespace: kubedb
