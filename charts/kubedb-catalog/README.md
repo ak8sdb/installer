@@ -52,16 +52,7 @@ The following table lists the configurable parameters of the `kubedb-catalog` ch
 | image.registry                 | Docker registry used to pull database image                                                                                            | <code>kubedb</code> |
 | image.overrideOfficialRegistry | If true, uses image registry for pulling official docker images. This can be used to pull images from a private registry               | <code>false</code>  |
 | catalog.elasticsearch          | If true, deploys Elasticsearch version catalog                                                                                         | <code>true</code>   |
-| catalog.etcd                   | If true, deploys Etcd version catalog                                                                                                  | <code>true</code>   |
-| catalog.memcached              | If true, deploys Memcached version catalog                                                                                             | <code>true</code>   |
 | catalog.mongodb                | If true, deploys MongoDB version catalog                                                                                               | <code>true</code>   |
-| catalog.mysql                  | If true, deploys MySQL version catalog                                                                                                 | <code>true</code>   |
-| catalog.mariadb                | If true, deploys MariaDB version catalog                                                                                               | <code>true</code>   |
-| catalog.perconaxtradb          | If true, deploys Percona XtraDB version catalog                                                                                        | <code>true</code>   |
-| catalog.pgbouncer              | If true, deploys PgBouncer version catalog                                                                                             | <code>true</code>   |
-| catalog.postgres               | If true, deploys PostgreSQL version catalog                                                                                            | <code>true</code>   |
-| catalog.proxysql               | If true, deploys ProxySQL version catalog                                                                                              | <code>true</code>   |
-| catalog.redis                  | If true, deploys Redis version catalog                                                                                                 | <code>true</code>   |
 | skipDeprecated                 | Set true to avoid deploying deprecated versions                                                                                        | <code>true</code>   |
 
 
