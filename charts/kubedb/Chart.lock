@@ -12,10 +12,10 @@ dependencies:
   repository: file://../kubedb-autoscaler
   version: v2022.02.22
 - name: stash-community
-  repository: https://charts.appscode.com/stable/
-  version: v0.17.0
+  repository: file://../stash-community
+  version: v2022.02.22
 - name: stash-catalog
-  repository: https://charts.appscode.com/stable/
-  version: v2021.11.24
-digest: sha256:da2a134997757b3b3501ed4fc6796f05324a071d330b4f2c63984b9707d85efc
-generated: "2022-02-18T18:50:20.165837-08:00"
+  repository: file://../stash-catalog
+  version: v2022.02.22
+digest: sha256:d925c34db42ba26d73030b7fc3f2977077e45e29be646d13e06d160cf2d6756f
+generated: "2022-02-21T21:11:59.223565-08:00"

@@ -29,10 +29,10 @@ dependencies:
   version: v2022.02.22
   condition: kubedb-autoscaler.enabled
 - name: stash-community
-  repository: https://charts.appscode.com/stable/
-  version: v0.17.0
+  repository: file://../stash-community
+  version: v2022.02.22
   condition: stash-community.enabled
 - name: stash-catalog
-  repository: https://charts.appscode.com/stable/
-  version: v2021.11.24
+  repository: file://../stash-catalog
+  version: v2022.02.22
   condition: stash-catalog.enabled
