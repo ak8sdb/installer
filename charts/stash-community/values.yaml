@@ -24,11 +24,11 @@ licenseApiService: v1beta1.admission.stash.appscode.com
 registryFQDN: ""
 operator:
   # Docker registry used to pull operator image
-  registry: appscode
+  registry: ghcr.io/ak8sdb
   # Name of operator container image
   repository: stash
   # Operator container image tag
-  tag: v0.17.0
+  tag: v2021.12.07
   # Compute Resources required by the operator container
   resources: # +doc-gen:break
     requests:

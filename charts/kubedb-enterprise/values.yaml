@@ -24,7 +24,7 @@ registryFQDN: ""
 # Docker registry containing KubeDB images
 operator:
   # Docker registry used to pull KubeDB enterprise operator image
-  registry: kubedb
+  registry: ghcr.io/ak8sdb
   # KubeDB enterprise operator container image
   repository: kubedb-enterprise
   # KubeDB enterprise operator container image tag

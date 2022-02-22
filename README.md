@@ -15,7 +15,7 @@ ak8sdb/kubedb-community             v2022.02.22   v2022.02.22 KubeDB Community b
 ak8sdb/kubedb-crds                  v2022.02.22   v2022.02.22 KubeDB and Stash crds
 ak8sdb/kubedb-enterprise            v2022.02.22   v2022.02.22 KubeDB Enterprise by AppsCode - Enterprise feat...
 
-$ helm install kubedb ak8sdb/kubedb \
+$ helm upgrade -i kubedb ak8sdb/kubedb \
   --set-file global.license=/path/to/license.txt
 
 NAME: kubedb
