@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubedb
 description: KubeDB by AppsCode - Production ready databases on Kubernetes
 type: application
-version: v2022.02.22
-appVersion: v2022.02.22
+version: v2022.03.30
+appVersion: v2022.03.30
 home: https://kubedb.com
 icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
 sources:
@@ -14,25 +14,25 @@ maintainers:
 dependencies:
 - name: kubedb-catalog
   repository: file://../kubedb-catalog
-  version: v2022.02.22
+  version: v2022.03.30
   condition: kubedb-catalog.enabled
 - name: kubedb-community
   repository: file://../kubedb-community
-  version: v2022.02.22
+  version: v2022.03.30
   condition: kubedb-community.enabled
 - name: kubedb-enterprise
   repository: file://../kubedb-enterprise
-  version: v2022.02.22
+  version: v2022.03.30
   condition: kubedb-enterprise.enabled
 - name: kubedb-autoscaler
   repository: file://../kubedb-autoscaler
-  version: v2022.02.22
+  version: v2022.03.30
   condition: kubedb-autoscaler.enabled
 - name: stash-community
   repository: file://../stash-community
-  version: v2022.02.22
+  version: v2022.03.30
   condition: stash-community.enabled
 - name: stash-catalog
   repository: file://../stash-catalog
-  version: v2022.02.22
+  version: v2022.03.30
   condition: stash-catalog.enabled
