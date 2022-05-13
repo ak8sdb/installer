@@ -1,13 +1,13 @@
 dependencies:
 - name: kubedb-catalog
   repository: file://../kubedb-catalog
-  version: v2022.03.30
+  version: v2022.05.13
 - name: kubedb-community
   repository: file://../kubedb-community
-  version: v2022.03.30
+  version: v2022.05.13
 - name: kubedb-enterprise
   repository: file://../kubedb-enterprise
-  version: v2022.03.30
+  version: v2022.05.13
 - name: kubedb-autoscaler
   repository: file://../kubedb-autoscaler
   version: v2022.03.30
@@ -17,5 +17,5 @@ dependencies:
 - name: stash-catalog
   repository: file://../stash-catalog
   version: v2022.03.30
-digest: sha256:84dad97840e6cfd04a2999d40bb71397038e44379592b3246ca3c2418fcd8ffa
-generated: "2022-03-30T04:34:47.834888-07:00"
+digest: sha256:aeeff8c72abc9d2b90785fc619ad30e9ac9050085c735704e16ae393f74f6088
+generated: "2022-05-13T09:40:34.150367-07:00"
