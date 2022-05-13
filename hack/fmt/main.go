@@ -209,8 +209,8 @@ func main() {
 						distro = "Percona"
 					}
 					if img, ok, _ := unstructured.NestedString(ri.Object.UnstructuredContent(), "spec", "db", "image"); ok {
-						reg, _, _ := ParseImage(img)
-						if reg == "mysql" {
+						_, repo, _, _ := ParseImage(img)
+						if repo == "mysql" {
 							distro = "MySQL"
 						}
 					}
@@ -328,12 +328,12 @@ func main() {
 		}
 
 		filename := filepath.Join(dir, "catalog", "active_versions.json")
-		err = os.MkdirAll(filepath.Dir(filename), 0755)
+		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0644)
+		err = ioutil.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -353,12 +353,12 @@ func main() {
 		}
 
 		filename := filepath.Join(dir, "catalog", "backup_tasks.json")
-		err = os.MkdirAll(filepath.Dir(filename), 0755)
+		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0644)
+		err = ioutil.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -378,12 +378,12 @@ func main() {
 		}
 
 		filename := filepath.Join(dir, "catalog", "restore_tasks.json")
-		err = os.MkdirAll(filepath.Dir(filename), 0755)
+		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0644)
+		err = ioutil.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -425,12 +425,12 @@ func main() {
 			filenameparts = append(filenameparts, strings.ToLower(k.Distro))
 		}
 		filename := filepath.Join(dir, "catalog", "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s.yaml", strings.Join(filenameparts, "-")))
-		err = os.MkdirAll(filepath.Dir(filename), 0755)
+		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, buf.Bytes(), 0644)
+		err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -455,12 +455,12 @@ func main() {
 
 		dbKind := strings.TrimSuffix(k.Kind, "Version")
 		filename := filepath.Join(dir, "catalog", "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s-psp.yaml", strings.ToLower(dbKind)))
-		err = os.MkdirAll(filepath.Dir(filename), 0755)
+		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, buf.Bytes(), 0644)
+		err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -495,21 +495,22 @@ func main() {
 					templatizeRegistry := func(field string) {
 						img, ok, _ := unstructured.NestedString(obj.Object, "spec", prop, field)
 						if ok {
-							reg, bin, tag := ParseImage(img)
+							reg, repo, bin, tag := ParseImage(img)
 							var newimg string
 							switch {
-							case tag == "" && reg == "":
-								newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}`, bin)
-							case tag == "" && reg == registryKubeDB:
-								newimg = fmt.Sprintf(`{{ include "catalog.registry" . }}/%s`, bin)
-							case tag == "" && reg != registryKubeDB:
-								newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q %q)) }}`, reg, bin)
-							case tag != "" && reg == "":
-								newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}:%s`, bin, tag)
-							case reg == registryKubeDB:
-								newimg = fmt.Sprintf(`{{ include "catalog.registry" . }}/%s:%s`, bin, tag)
+							case tag == "" && (reg != "" || repo != ""):
+								newimg = fmt.Sprintf(`{{ include "catalog.registry" (merge (dict "_reg" "%s" "_repo" "%s") .Values) }}/%s`, reg, repo, bin)
+							case tag != "" && (reg != "" || repo != ""):
+								newimg = fmt.Sprintf(`{{ include "catalog.registry" (merge (dict "_reg" "%s" "_repo" "%s") .Values) }}/%s:%s`, reg, repo, bin, tag)
+							case tag == "":
+								newimg = fmt.Sprintf(`{{ include "official.registry" (merge (dict "_bin" "%s") .Values) }}`, bin)
 							default:
-								newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q %q)) }}:%s`, reg, bin, tag)
+								newimg = fmt.Sprintf(`{{ include "official.registry" (merge (dict "_bin" "%s") .Values) }}:%s`, bin, tag)
+
+								// case tag == "":
+								//	newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}`, bin)
+								// default:
+								//	newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}:%s`, bin, tag)
 							}
 							err = unstructured.SetNestedField(obj.Object, newimg, "spec", prop, field)
 							if err != nil {
@@ -548,12 +549,12 @@ func main() {
 				filenameparts = append(filenameparts, strings.ToLower(k.Distro))
 			}
 			filename := filepath.Join(dir, "charts", "kubedb-catalog", "new_templates", strings.ToLower(dbKind), fmt.Sprintf("%s.yaml", strings.Join(filenameparts, "-")))
-			err = os.MkdirAll(filepath.Dir(filename), 0755)
+			err = os.MkdirAll(filepath.Dir(filename), 0o755)
 			if err != nil {
 				panic(err)
 			}
 
-			err = ioutil.WriteFile(filename, buf.Bytes(), 0644)
+			err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
 			if err != nil {
 				panic(err)
 			}
@@ -576,9 +577,12 @@ func main() {
 					panic("missing psp " + pspName + " for db " + dbKind)
 				}
 
+				content := pspStore[pspName].DeepCopy().UnstructuredContent()
+				unstructured.RemoveNestedField(content, "spec", "allowPrivilegeEscalation")
+				unstructured.RemoveNestedField(content, "spec", "privileged")
 				data := map[string]interface{}{
 					"key":    strings.ToLower(dbKind),
-					"object": pspStore[pspName].Object,
+					"object": content,
 				}
 				funcMap := sprig.TxtFuncMap()
 				funcMap["toYaml"] = toYAML
@@ -591,12 +595,12 @@ func main() {
 			}
 
 			filename := filepath.Join(dir, "charts", "kubedb-catalog", "new_templates", strings.ToLower(dbKind), fmt.Sprintf("%s-psp.yaml", strings.ToLower(dbKind)))
-			err = os.MkdirAll(filepath.Dir(filename), 0755)
+			err = os.MkdirAll(filepath.Dir(filename), 0o755)
 			if err != nil {
 				panic(err)
 			}
 
-			err = ioutil.WriteFile(filename, buf.Bytes(), 0644)
+			err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
 			if err != nil {
 				panic(err)
 			}
@@ -724,17 +728,23 @@ func main() {
 	}
 }
 
-func ParseImage(s string) (reg, bin, tag string) {
+func ParseImage(s string) (reg, repo, bin, tag string) {
 	idx := strings.IndexRune(s, ':')
 	if idx != -1 {
 		tag = s[idx+1:]
 		s = s[:idx]
 	}
-	idx = strings.IndexRune(s, '/')
-	if idx == -1 {
-		bin = s
-	} else {
-		reg, bin = s[:idx], s[idx+1:]
+	parts := strings.Split(s, "/")
+	if len(parts) >= 1 {
+		bin = parts[len(parts)-1]
+		parts = parts[:len(parts)-1]
+	}
+	if len(parts) >= 1 {
+		repo = parts[len(parts)-1]
+		parts = parts[:len(parts)-1]
+	}
+	if len(parts) > 0 {
+		reg = strings.Join(parts, "/")
 	}
 	return
 }

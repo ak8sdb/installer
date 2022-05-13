@@ -13,7 +13,7 @@ registryFQDN: ""
 
 image:
   # Docker registry used to pull database image
-  registry: kubedb
+  registry: ""
 
   # If true, uses image registry for pulling official docker images.
   # This can be used to pull images from a private registry
@@ -24,6 +24,14 @@ catalog:
   elasticsearch: true
   # If true, deploys MongoDB version catalog
   mongodb: true
+
+psp:
+  elasticsearch:
+    allowPrivilegeEscalation: true
+    privileged: true
+  mongodb:
+    allowPrivilegeEscalation: false
+    privileged: false
 
 # Set true to avoid deploying deprecated versions
 skipDeprecated: true
