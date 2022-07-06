@@ -39,7 +39,7 @@ spec:
         image: {{ include "operator.registry" . }}/{{ .Values.operator.repository }}:{{ .Values.operator.tag }}
         imagePullPolicy: {{ .Values.imagePullPolicy  }}
         args:
-        - run
+        - operator
         - --v={{ .Values.logLevel }}
         - --secure-port={{ .Values.apiserver.port }}
         - --audit-log-path=-
