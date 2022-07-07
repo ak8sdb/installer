@@ -22,9 +22,9 @@ BIN      := installer
 OS   := $(if $(GOOS),$(GOOS),$(shell go env GOOS))
 ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 
-GO_VERSION       ?= 1.17
+GO_VERSION       ?= 1.18
 BUILD_IMAGE      ?= appscode/golang-dev:$(GO_VERSION)
-CHART_TEST_IMAGE ?= quay.io/helmpack/chart-testing:v3.4.0
+CHART_TEST_IMAGE ?= quay.io/helmpack/chart-testing:v3.5.1
 
 # Directories that we need created to build/test.
 BUILD_DIRS  := bin/$(OS)_$(ARCH)     \
@@ -35,7 +35,7 @@ DOCKER_REPO_ROOT := /go/src/$(GO_PKG)/$(REPO)
 
 CHART_REGISTRY     ?= ak8sdb
 CHART_REGISTRY_URL ?= https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-CHART_VERSION      ?= v2022.03.30
+CHART_VERSION      ?= v2022.07.07
 APP_VERSION        ?= $(CHART_VERSION)
 
 fmt: $(BUILD_DIRS)

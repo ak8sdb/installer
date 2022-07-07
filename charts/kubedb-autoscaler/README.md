@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo ak8sdb/kubedb-autoscaler --version=v2022.03.30
-$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.03.30
+$ helm search repo ak8sdb/kubedb-autoscaler --version=v2022.07.07
+$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.07.07
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys a KubeDB Autoscaler operator on a [Kubernetes](http://kuberne
 To install/upgrade the chart with the release name `kubedb-autoscaler`:
 
 ```bash
-$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.03.30
+$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.07.07
 ```
 
 The command deploys a KubeDB Autoscaler operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -55,7 +55,7 @@ The following table lists the configurable parameters of the `kubedb-autoscaler`
 | registryFQDN                             | Docker registry fqdn used to pull KubeDB related images. Set this to use docker registry hosted at ${registryFQDN}/${registry}/${image}                                                                                                                                                                                                                                      | <code>""</code>                                             |
 | operator.registry                        | Docker registry used to pull KubeDB enterprise operator image                                                                                                                                                                                                                                                                                                                | <code>ghcr.io/ak8sdb</code>                                 |
 | operator.repository                      | KubeDB enterprise operator container image                                                                                                                                                                                                                                                                                                                                   | <code>kubedb-autoscaler</code>                              |
-| operator.tag                             | KubeDB enterprise operator container image tag                                                                                                                                                                                                                                                                                                                               | <code>v2022.03.30</code>                                    |
+| operator.tag                             | KubeDB enterprise operator container image tag                                                                                                                                                                                                                                                                                                                               | <code>v2022.07.07</code>                                    |
 | operator.resources                       | Compute Resources required by the enterprise operator container                                                                                                                                                                                                                                                                                                              | <code>{}</code>                                             |
 | operator.securityContext                 | requests: cpu: 100m memory: 128Mi Security options the enterprise operator container should run with                                                                                                                                                                                                                                                                         | <code>{}</code>                                             |
 | cleaner.registry                         | Docker registry used to pull Webhook cleaner image                                                                                                                                                                                                                                                                                                                           | <code>appscode</code>                                       |
@@ -78,7 +78,7 @@ The following table lists the configurable parameters of the `kubedb-autoscaler`
 | apiserver.groupPriorityMinimum           | The minimum priority the webhook api group should have at least. Please see https://github.com/kubernetes/kube-aggregator/blob/release-1.9/pkg/apis/apiregistration/v1beta1/types.go#L58-L64 for more information on proper values of this field.                                                                                                                            | <code>10000</code>                                          |
 | apiserver.versionPriority                | The ordering of the webhook api inside of the group. Please see https://github.com/kubernetes/kube-aggregator/blob/release-1.9/pkg/apis/apiregistration/v1beta1/types.go#L66-L70 for more information on proper values of this field                                                                                                                                         | <code>15</code>                                             |
 | apiserver.enableMutatingWebhook          | If true, mutating webhook is configured for KubeDB CRDss                                                                                                                                                                                                                                                                                                                     | <code>true</code>                                           |
-| apiserver.enableValidatingWebhook        | If true, validating webhook is configured for KubeDB CRDss                                                                                                                                                                                                                                                                                                                   | <code>false</code>                                          |
+| apiserver.enableValidatingWebhook        | If true, validating webhook is configured for KubeDB CRDss                                                                                                                                                                                                                                                                                                                   | <code>true</code>                                           |
 | apiserver.bypassValidatingWebhookXray    | If true, bypasses checks that validating webhook is actually enabled in the Kubernetes cluster.                                                                                                                                                                                                                                                                              | <code>false</code>                                          |
 | apiserver.useKubeapiserverFqdnForAks     | If true, uses kube-apiserver FQDN for AKS cluster to workaround https://github.com/Azure/AKS/issues/522 (default true)                                                                                                                                                                                                                                                       | <code>true</code>                                           |
 | apiserver.healthcheck.enabled            | healthcheck configures the readiness and liveliness probes for the operator pod.                                                                                                                                                                                                                                                                                             | <code>false</code>                                          |
@@ -99,12 +99,12 @@ The following table lists the configurable parameters of the `kubedb-autoscaler`
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.03.30 --set replicaCount=1
+$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.07.07 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.03.30 --values values.yaml
+$ helm upgrade -i kubedb-autoscaler ak8sdb/kubedb-autoscaler -n kubedb --create-namespace --version=v2022.07.07 --values values.yaml
 ```

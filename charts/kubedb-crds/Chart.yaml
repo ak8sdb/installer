@@ -2,5 +2,5 @@ apiVersion: v2
 name: kubedb-crds
 description: KubeDB and Stash crds
 type: application
-version: v2022.05.13
-appVersion: v2022.05.13
+version: v2022.07.07
+appVersion: v2022.07.07
