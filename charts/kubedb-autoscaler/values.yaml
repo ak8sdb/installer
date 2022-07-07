@@ -100,7 +100,7 @@ apiserver:
   # If true, mutating webhook is configured for KubeDB CRDss
   enableMutatingWebhook: true
   # If true, validating webhook is configured for KubeDB CRDss
-  enableValidatingWebhook: false
+  enableValidatingWebhook: true
   # If true, bypasses checks that validating webhook is actually enabled in the Kubernetes cluster.
   bypassValidatingWebhookXray: false
   # If true, uses kube-apiserver FQDN for AKS cluster to workaround https://github.com/Azure/AKS/issues/522 (default true)
