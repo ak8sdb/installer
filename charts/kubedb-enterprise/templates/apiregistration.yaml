@@ -32,24 +32,6 @@ spec:
   groupPriorityMinimum: {{ .Values.apiserver.groupPriorityMinimum }}
   versionPriority: {{ .Values.apiserver.versionPriority }}
 {{- end }}
-{{- if .Values.apiserver.enableMutatingWebhook }}
----
-apiVersion: apiregistration.k8s.io/v1
-kind: APIService
-metadata:
-  name: v1alpha1.mutators.ops.kubedb.com
-  labels:
-    {{- include "kubedb-enterprise.labels" . | nindent 4 }}
-spec:
-  group: mutators.ops.kubedb.com
-  version: v1alpha1
-  service:
-    namespace: {{ .Release.Namespace }}
-    name: {{ include "kubedb-enterprise.fullname" . }}
-  caBundle: {{ $caCrt }}
-  groupPriorityMinimum: {{ .Values.apiserver.groupPriorityMinimum }}
-  versionPriority: {{ .Values.apiserver.versionPriority }}
-{{- end }}
 ---
 apiVersion: v1
 kind: Secret
