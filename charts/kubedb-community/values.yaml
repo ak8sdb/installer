@@ -28,7 +28,7 @@ operator:
   # KubeDB operator container image
   repository: operator
   # KubeDB operator container image tag
-  tag: v2022.07.07
+  tag: v2022.08.02
   # Compute Resources required by the operator container
   resources: {}
   # requests:

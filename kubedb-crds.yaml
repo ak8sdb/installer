@@ -274,6 +274,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -295,14 +304,8 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                   topology:
                     properties:
@@ -317,6 +320,15 @@ spec:
                             items:
                               type: string
                             type: array
+                          inMemoryStorage:
+                            properties:
+                              scalingFactorPercentage:
+                                format: int32
+                                type: integer
+                              usageThresholdPercentage:
+                                format: int32
+                                type: integer
+                            type: object
                           maxAllowed:
                             additionalProperties:
                               anyOf:
@@ -338,14 +350,8 @@ spec:
                           resourceDiffPercentage:
                             format: int32
                             type: integer
-                          scalingThreshold:
-                            format: int32
-                            type: integer
                           trigger:
                             type: string
-                          usageThreshold:
-                            format: int32
-                            type: integer
                         type: object
                       ingest:
                         properties:
@@ -358,6 +364,15 @@ spec:
                             items:
                               type: string
                             type: array
+                          inMemoryStorage:
+                            properties:
+                              scalingFactorPercentage:
+                                format: int32
+                                type: integer
+                              usageThresholdPercentage:
+                                format: int32
+                                type: integer
+                            type: object
                           maxAllowed:
                             additionalProperties:
                               anyOf:
@@ -379,14 +394,8 @@ spec:
                           resourceDiffPercentage:
                             format: int32
                             type: integer
-                          scalingThreshold:
-                            format: int32
-                            type: integer
                           trigger:
                             type: string
-                          usageThreshold:
-                            format: int32
-                            type: integer
                         type: object
                       master:
                         properties:
@@ -399,6 +408,15 @@ spec:
                             items:
                               type: string
                             type: array
+                          inMemoryStorage:
+                            properties:
+                              scalingFactorPercentage:
+                                format: int32
+                                type: integer
+                              usageThresholdPercentage:
+                                format: int32
+                                type: integer
+                            type: object
                           maxAllowed:
                             additionalProperties:
                               anyOf:
@@ -420,14 +438,8 @@ spec:
                           resourceDiffPercentage:
                             format: int32
                             type: integer
-                          scalingThreshold:
-                            format: int32
-                            type: integer
                           trigger:
                             type: string
-                          usageThreshold:
-                            format: int32
-                            type: integer
                         type: object
                     type: object
                 type: object
@@ -727,6 +739,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -748,14 +769,8 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                   disableScaleDown:
                     type: boolean
@@ -770,6 +785,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -791,14 +815,8 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                   replicaSet:
                     properties:
@@ -811,6 +829,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -832,14 +859,8 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                   shard:
                     properties:
@@ -852,6 +873,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -873,14 +903,8 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                   standalone:
                     properties:
@@ -893,6 +917,15 @@ spec:
                         items:
                           type: string
                         type: array
+                      inMemoryStorage:
+                        properties:
+                          scalingFactorPercentage:
+                            format: int32
+                            type: integer
+                          usageThresholdPercentage:
+                            format: int32
+                            type: integer
+                        type: object
                       maxAllowed:
                         additionalProperties:
                           anyOf:
@@ -914,19 +947,36 @@ spec:
                       resourceDiffPercentage:
                         format: int32
                         type: integer
-                      scalingThreshold:
-                        format: int32
-                        type: integer
                       trigger:
                         type: string
-                      usageThreshold:
-                        format: int32
-                        type: integer
                     type: object
                 type: object
               databaseRef:
                 properties:
                   name:
+                    type: string
+                type: object
+              opsRequestOptions:
+                properties:
+                  apply:
+                    default: IfReady
+                    enum:
+                    - IfReady
+                    - Always
+                    type: string
+                  readinessCriteria:
+                    properties:
+                      objectsCountDiffPercentage:
+                        format: int32
+                        maximum: 100
+                        minimum: 0
+                        type: integer
+                      oplogMaxLagSeconds:
+                        format: int32
+                        minimum: 0
+                        type: integer
+                    type: object
+                  timeout:
                     type: string
                 type: object
               storage:
@@ -14027,6 +14077,7 @@ spec:
                 - Failed
                 - Approved
                 - Denied
+                - Skipped
                 type: string
             type: object
         type: object
@@ -14080,6 +14131,12 @@ spec:
             type: object
           spec:
             properties:
+              apply:
+                default: IfReady
+                enum:
+                - IfReady
+                - Always
+                type: string
               configuration:
                 properties:
                   configServer:
@@ -14544,6 +14601,7 @@ spec:
                 - Failed
                 - Approved
                 - Denied
+                - Skipped
                 type: string
             type: object
         type: object
