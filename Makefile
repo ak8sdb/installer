@@ -35,7 +35,7 @@ DOCKER_REPO_ROOT := /go/src/$(GO_PKG)/$(REPO)
 
 CHART_REGISTRY     ?= ak8sdb
 CHART_REGISTRY_URL ?= https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-CHART_VERSION      ?= v2022.07.07
+CHART_VERSION      ?= v2022.08.02
 APP_VERSION        ?= $(CHART_VERSION)
 
 fmt: $(BUILD_DIRS)
