@@ -30,7 +30,7 @@ operator:
   # KubeDB enterprise operator container image
   repository: kubedb-autoscaler
   # KubeDB enterprise operator container image tag
-  tag: v2022.08.26
+  tag: v2023.03.16
   # Compute Resources required by the enterprise operator container
   resources: {}
   # requests:
