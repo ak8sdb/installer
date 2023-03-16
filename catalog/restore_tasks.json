@@ -8,6 +8,10 @@
   "elasticsearch-restore-7.14.0": [
     "opensearch-1.1.0"
   ],
+  "elasticsearch-restore-8.2.0": [
+    "xpack-8.6.2",
+    "kubedb-xpack-8.6.2"
+  ],
   "elasticsearch-restore-7.2.0": [
     "xpack-7.2.1-v1",
     "xpack-7.1.1-v1",
