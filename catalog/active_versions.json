@@ -1,6 +1,7 @@
 {
   "Elasticsearch": [
     "xpack-8.6.2",
+    "xpack-7.17.3",
     "searchguard-7.14.2",
     "xpack-7.14.0",
     "kubedb-xpack-7.14.0",
