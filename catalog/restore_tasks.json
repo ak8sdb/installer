@@ -6,11 +6,8 @@
     "searchguard-6.8.1"
   ],
   "elasticsearch-restore-7.14.0": [
+    "xpack-7.17.3",
     "opensearch-1.1.0"
-  ],
-  "elasticsearch-restore-8.2.0": [
-    "xpack-8.6.2",
-    "kubedb-xpack-8.6.2"
   ],
   "elasticsearch-restore-7.2.0": [
     "xpack-7.2.1-v1",
@@ -67,6 +64,9 @@
     "kubedb-xpack-7.14.0",
     "kubedb-xpack-7.13.2",
     "kubedb-xpack-7.12.0"
+  ],
+  "elasticsearch-restore-8.2.0": [
+    "xpack-8.6.2"
   ],
   "mongodb-restore-3.4.17": [
     "3.4.17-v1"
