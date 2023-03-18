@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo ak8sdb/kubedb-enterprise --version=v2023.03.16
-$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.16
+$ helm search repo ak8sdb/kubedb-enterprise --version=v2023.03.20
+$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.20
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys a KubeDB Enterprise operator on a [Kubernetes](http://kuberne
 To install/upgrade the chart with the release name `kubedb-enterprise`:
 
 ```bash
-$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.16
+$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.20
 ```
 
 The command deploys a KubeDB Enterprise operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -54,7 +54,7 @@ The following table lists the configurable parameters of the `kubedb-enterprise`
 | registryFQDN                          | Docker registry fqdn used to pull KubeDB related images Set this to use docker registry hosted at ${registryFQDN}/${registry}/${image}                                                                                                                                                                                                                                       | <code>""</code>                           |
 | operator.registry                     | Docker registry used to pull KubeDB enterprise operator image                                                                                                                                                                                                                                                                                                                | <code>ghcr.io/ak8sdb</code>               |
 | operator.repository                   | KubeDB enterprise operator container image                                                                                                                                                                                                                                                                                                                                   | <code>kubedb-enterprise</code>            |
-| operator.tag                          | KubeDB enterprise operator container image tag                                                                                                                                                                                                                                                                                                                               | <code>v2023.03.16</code>                  |
+| operator.tag                          | KubeDB enterprise operator container image tag                                                                                                                                                                                                                                                                                                                               | <code>v2023.03.20</code>                  |
 | operator.resources                    | Compute Resources required by the enterprise operator container                                                                                                                                                                                                                                                                                                              | <code>{}</code>                           |
 | operator.securityContext              | requests: cpu: 100m memory: 128Mi Security options the enterprise operator container should run with                                                                                                                                                                                                                                                                         | <code>{}</code>                           |
 | cleaner.registry                      | Docker registry used to pull Webhook cleaner image                                                                                                                                                                                                                                                                                                                           | <code>appscode</code>                     |
@@ -95,12 +95,12 @@ The following table lists the configurable parameters of the `kubedb-enterprise`
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.16 --set replicaCount=1
+$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.20 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.16 --values values.yaml
+$ helm upgrade -i kubedb-enterprise ak8sdb/kubedb-enterprise -n kubedb --create-namespace --version=v2023.03.20 --values values.yaml
 ```
