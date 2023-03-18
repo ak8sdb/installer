@@ -27,6 +27,6 @@ spec:
       restoreTask:
         name: elasticsearch-restore-7.3.2
         params:
-          - name: args
-            value: --match=^(?![.])(?!kubedb-system)(?!searchguard).+
+        - name: args
+          value: --match=^(?![.])(?!kubedb-system)(?!searchguard).+
   version: 7.9.3
