@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubedb
 description: KubeDB by AppsCode - Production ready databases on Kubernetes
 type: application
-version: v2023.03.20
-appVersion: v2023.03.20
+version: v2023.06.20
+appVersion: v2023.06.20
 home: https://kubedb.com
 icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
 sources:
@@ -14,7 +14,7 @@ maintainers:
 dependencies:
 - name: kubedb-catalog
   repository: file://../kubedb-catalog
-  version: v2023.03.20
+  version: v2023.06.20
   condition: kubedb-catalog.enabled
 - name: kubedb-community
   repository: file://../kubedb-community

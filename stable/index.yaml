@@ -2,6 +2,48 @@ apiVersion: v1
 entries:
   kubedb:
   - apiVersion: v2
+    appVersion: v2023.06.20
+    created: "2023-06-20T09:55:09.543301-07:00"
+    dependencies:
+    - condition: kubedb-catalog.enabled
+      name: kubedb-catalog
+      repository: file://../kubedb-catalog
+      version: v2023.06.20
+    - condition: kubedb-community.enabled
+      name: kubedb-community
+      repository: file://../kubedb-community
+      version: v2023.03.20
+    - condition: kubedb-enterprise.enabled
+      name: kubedb-enterprise
+      repository: file://../kubedb-enterprise
+      version: v2023.03.20
+    - condition: kubedb-autoscaler.enabled
+      name: kubedb-autoscaler
+      repository: file://../kubedb-autoscaler
+      version: v2023.03.20
+    - condition: stash-community.enabled
+      name: stash-community
+      repository: file://../stash-community
+      version: v2023.03.20
+    - condition: stash-catalog.enabled
+      name: stash-catalog
+      repository: file://../stash-catalog
+      version: v2023.03.20
+    description: KubeDB by AppsCode - Production ready databases on Kubernetes
+    digest: 8f2d03ada3ecb9fb16304f9474e2909a9d092ce14b48c09ce0b30b927fdbace7
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb
+    sources:
+    - https://github.com/kubedb
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb/kubedb-v2023.06.20.tgz
+    version: v2023.06.20
+  - apiVersion: v2
     appVersion: v2023.03.20
     created: "2023-03-19T20:50:32.142795029-07:00"
     dependencies:
@@ -508,9 +550,9 @@ entries:
   kubedb-autoscaler:
   - apiVersion: v1
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.144196666-07:00"
+    created: "2023-06-20T09:55:09.543833-07:00"
     description: KubeDB Autoscaler by AppsCode - Autoscale KubeDB operated Databases
-    digest: 3eae22b2e65b1e6b3b22ae14fa175acd9c26505de4c7f0d62189d40ebc9b6392
+    digest: cd153de988a80da8bb706d486d346d25ac3ca8e715e04716605c15e6b2512eab
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-autoscaler-icon.png
     maintainers:
@@ -603,6 +645,22 @@ entries:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-autoscaler/kubedb-autoscaler-v2022.02.22.tgz
     version: v2022.02.22
   kubedb-catalog:
+  - apiVersion: v1
+    appVersion: v2023.06.20
+    created: "2023-06-20T09:55:09.544732-07:00"
+    description: KubeDB Catalog by AppsCode - Catalog for database versions
+    digest: 3493933efa24d9a807155353a8ba7b7329bf1861c3286a6fe59f75e6e191520a
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/icon/kubedb.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb-catalog
+    sources:
+    - https://github.com/kubedb
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-catalog/kubedb-catalog-v2023.06.20.tgz
+    version: v2023.06.20
   - apiVersion: v1
     appVersion: v2023.03.20
     created: "2023-03-19T20:50:32.146152059-07:00"
@@ -718,9 +776,9 @@ entries:
   kubedb-community:
   - apiVersion: v1
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.147654886-07:00"
+    created: "2023-06-20T09:55:09.545213-07:00"
     description: KubeDB Community by AppsCode - Community features for KubeDB
-    digest: 50021b5d547fb8290bcee73a47878d5d15ef9cf560e3255e9dc81186cd20f40d
+    digest: b80a9a943b7eca47a3ceace370ef2d0ca44f018f7edb1121490c1c3949eaa866
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-community-icon.png
     maintainers:
@@ -831,9 +889,9 @@ entries:
   kubedb-crds:
   - apiVersion: v2
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.158579622-07:00"
+    created: "2023-06-20T09:55:09.548381-07:00"
     description: KubeDB and Stash crds
-    digest: a70d884ec6a571428f76f142801fb739c8387d18aa97b37853e032bcfae45b83
+    digest: 9400bf62868a192fa3f6ed3e652f0b3a717b6838df32de66677891ae675c5bac
     name: kubedb-crds
     type: application
     urls:
@@ -952,9 +1010,9 @@ entries:
   kubedb-enterprise:
   - apiVersion: v1
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.160114233-07:00"
+    created: "2023-06-20T09:55:09.548823-07:00"
     description: KubeDB Enterprise by AppsCode - Enterprise features for KubeDB
-    digest: f3b9a60717141d505c8754297e0e0af2a477616eb9de084ea8f3ca83cc5a1f4f
+    digest: 3bc9e83f6e04076b3bfe6a2960d348d042dd034fed7828a573de3e3d8e1f8275
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-enterprise-icon.png
     maintainers:
@@ -1065,9 +1123,9 @@ entries:
   stash-catalog:
   - apiVersion: v2
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.165040455-07:00"
+    created: "2023-06-20T09:55:09.549863-07:00"
     description: Stash Catalog by AppsCode - Catalog of Stash Addons
-    digest: eabc712e403e2f6f497cff1e5c681d26d43ae36bd481333a069b4d12535bc69f
+    digest: ec5a1005ea9a1aab4f395107bb7203109541a2ac560cf2aa9d83fc15908f4dbc
     home: https://stash.run
     icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
     maintainers:
@@ -1117,9 +1175,9 @@ entries:
   stash-community:
   - apiVersion: v1
     appVersion: v2023.03.20
-    created: "2023-03-19T20:50:32.167279072-07:00"
+    created: "2023-06-20T09:55:09.550503-07:00"
     description: Free community features for Stash by AppsCode
-    digest: a685936b84dd513c10e07b63da6455e465134bb934584b5f274fd78ab904497d
+    digest: 5e42f2eb2c5cecefe73f9098dbb48b08e9493f0643ffb10d1272ad1f3a1817c4
     home: https://stash.run
     icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
     maintainers:
@@ -1163,4 +1221,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/stash-community/stash-community-v2022.02.22.tgz
     version: v2022.02.22
-generated: "2023-03-19T20:50:32.127194461-07:00"
+generated: "2023-06-20T09:55:09.539023-07:00"
