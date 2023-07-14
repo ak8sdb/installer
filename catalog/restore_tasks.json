@@ -6,6 +6,7 @@
     "searchguard-6.8.1"
   ],
   "elasticsearch-restore-7.14.0": [
+    "xpack-7.17.10",
     "xpack-7.17.3",
     "opensearch-1.1.0"
   ],
