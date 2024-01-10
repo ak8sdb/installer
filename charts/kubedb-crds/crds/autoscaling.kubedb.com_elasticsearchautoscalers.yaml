@@ -1,7 +1,6 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/name: kubedb
   name: elasticsearchautoscalers.autoscaling.kubedb.com
@@ -366,14 +365,14 @@ spec:
                       type: integer
                     reason:
                       type: string
+                    severity:
+                      type: string
                     status:
                       type: string
                     type:
                       type: string
                   required:
                   - lastTransitionTime
-                  - message
-                  - reason
                   - status
                   - type
                   type: object

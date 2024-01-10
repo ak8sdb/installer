@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo ak8sdb/kubedb-catalog --version=v2023.06.20
-$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2023.06.20
+$ helm search repo ak8sdb/kubedb-catalog --version=v2024.1.9
+$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2024.1.9
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys KubeDB catalog on a [Kubernetes](http://kubernetes.io) cluste
 To install/upgrade the chart with the release name `kubedb-catalog`:
 
 ```bash
-$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2023.06.20
+$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2024.1.9
 ```
 
 The command deploys KubeDB catalog on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -64,12 +64,12 @@ The following table lists the configurable parameters of the `kubedb-catalog` ch
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2023.06.20 --set -- generate from values file --
+$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2024.1.9 --set -- generate from values file --
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2023.06.20 --values values.yaml
+$ helm upgrade -i kubedb-catalog ak8sdb/kubedb-catalog -n kubedb --create-namespace --version=v2024.1.9 --values values.yaml
 ```

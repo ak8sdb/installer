@@ -2,6 +2,48 @@ apiVersion: v1
 entries:
   kubedb:
   - apiVersion: v2
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.244173-08:00"
+    dependencies:
+    - condition: kubedb-catalog.enabled
+      name: kubedb-catalog
+      repository: file://../kubedb-catalog
+      version: v2024.1.9
+    - condition: kubedb-community.enabled
+      name: kubedb-community
+      repository: file://../kubedb-community
+      version: v2024.1.9
+    - condition: kubedb-enterprise.enabled
+      name: kubedb-enterprise
+      repository: file://../kubedb-enterprise
+      version: v2024.1.9
+    - condition: kubedb-autoscaler.enabled
+      name: kubedb-autoscaler
+      repository: file://../kubedb-autoscaler
+      version: v2024.1.9
+    - condition: stash-community.enabled
+      name: stash-community
+      repository: file://../stash-community
+      version: v2024.1.9
+    - condition: stash-catalog.enabled
+      name: stash-catalog
+      repository: file://../stash-catalog
+      version: v2024.1.9
+    description: KubeDB by AppsCode - Production ready databases on Kubernetes
+    digest: 250fc6f50d0b78aea5d4a58d778ddac78785ee8251e3df349b1d65071ac5909e
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb
+    sources:
+    - https://github.com/kubedb
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb/kubedb-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v2
     appVersion: v2023.06.20
     created: "2023-10-18T00:15:45.660772-07:00"
     dependencies:
@@ -591,6 +633,22 @@ entries:
     version: v2021.03.17
   kubedb-autoscaler:
   - apiVersion: v1
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.244586-08:00"
+    description: KubeDB Autoscaler by AppsCode - Autoscale KubeDB operated Databases
+    digest: a061610805411766f41a93ff723b496a2a9bb83ec2991a696c80ce0bd1e00bb7
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-autoscaler-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb-autoscaler
+    sources:
+    - https://github.com/kubedb
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-autoscaler/kubedb-autoscaler-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v1
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.661184-07:00"
     description: KubeDB Autoscaler by AppsCode - Autoscale KubeDB operated Databases
@@ -687,6 +745,22 @@ entries:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-autoscaler/kubedb-autoscaler-v2022.02.22.tgz
     version: v2022.02.22
   kubedb-catalog:
+  - apiVersion: v1
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.245098-08:00"
+    description: KubeDB Catalog by AppsCode - Catalog for database versions
+    digest: f7df7de540ed5094ecc4c4efcc509b4db4e17682d2cf0c0905d0b37e4f9a73c0
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/icon/kubedb.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb-catalog
+    sources:
+    - https://github.com/kubedb
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-catalog/kubedb-catalog-v2024.1.9.tgz
+    version: v2024.1.9
   - apiVersion: v1
     appVersion: v2023.06.20
     created: "2023-10-18T00:15:45.661718-07:00"
@@ -817,6 +891,22 @@ entries:
     version: v2022.02.22
   kubedb-community:
   - apiVersion: v1
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.245495-08:00"
+    description: KubeDB Community by AppsCode - Community features for KubeDB
+    digest: ff416538ac95db9b2381ebbdd67c97530f616ad713b76cb1bc53e31822a16778
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-community-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb-community
+    sources:
+    - https://github.com/kubedb
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-community/kubedb-community-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v1
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.662152-07:00"
     description: KubeDB Community by AppsCode - Community features for KubeDB
@@ -946,6 +1036,16 @@ entries:
     version: v2022.02.22
   kubedb-crds:
   - apiVersion: v2
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.248849-08:00"
+    description: KubeDB and Stash crds
+    digest: ac737dd3cda84cf52c847e7f707388b9c1ca0355e7d19da939b42215d2f589c9
+    name: kubedb-crds
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-crds/kubedb-crds-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v2
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.66564-07:00"
     description: KubeDB and Stash crds
@@ -1066,6 +1166,22 @@ entries:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-crds/kubedb-crds-v2021.03.17.tgz
     version: v2021.03.17
   kubedb-enterprise:
+  - apiVersion: v1
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.24928-08:00"
+    description: KubeDB Enterprise by AppsCode - Enterprise features for KubeDB
+    digest: c94c2e792ea9d7a4111a7bb0d7e3fd1b8784fa2a56670db662b00e473a785cf1
+    home: https://kubedb.com
+    icon: https://cdn.appscode.com/images/products/kubedb/kubedb-enterprise-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubedb-enterprise
+    sources:
+    - https://github.com/kubedb
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/kubedb-enterprise/kubedb-enterprise-v2024.1.9.tgz
+    version: v2024.1.9
   - apiVersion: v1
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.666074-07:00"
@@ -1196,6 +1312,23 @@ entries:
     version: v2022.02.22
   stash-catalog:
   - apiVersion: v2
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.250286-08:00"
+    description: Stash Catalog by AppsCode - Catalog of Stash Addons
+    digest: 2951e3388154521561973bff306b780b234a71d3819fc06b9d2b71176da1ba9a
+    home: https://stash.run
+    icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: stash-catalog
+    sources:
+    - https://github.com/stashed
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/stash-catalog/stash-catalog-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v2
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.667049-07:00"
     description: Stash Catalog by AppsCode - Catalog of Stash Addons
@@ -1248,6 +1381,22 @@ entries:
     version: v2022.02.22
   stash-community:
   - apiVersion: v1
+    appVersion: v2024.1.9
+    created: "2024-01-09T20:17:50.250917-08:00"
+    description: Free community features for Stash by AppsCode
+    digest: b2b30056a4c152e6f88bce9253d1d78dd141e4d144379495ec298cdbb66bf5be
+    home: https://stash.run
+    icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: stash-community
+    sources:
+    - https://github.com/stashed
+    urls:
+    - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/stash-community/stash-community-v2024.1.9.tgz
+    version: v2024.1.9
+  - apiVersion: v1
     appVersion: v2023.03.20
     created: "2023-10-18T00:15:45.667674-07:00"
     description: Free community features for Stash by AppsCode
@@ -1295,4 +1444,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/stash-community/stash-community-v2022.02.22.tgz
     version: v2022.02.22
-generated: "2023-10-18T00:15:45.65599-07:00"
+generated: "2024-01-09T20:17:50.240053-08:00"

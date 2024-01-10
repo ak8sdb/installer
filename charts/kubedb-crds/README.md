@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo ak8sdb/kubedb-crds --version=v2023.03.20
-$ helm upgrade -i kubedb-crds ak8sdb/kubedb-crds -n kubedb --create-namespace --version=v2023.03.20
+$ helm search repo ak8sdb/kubedb-crds --version=v2024.1.9
+$ helm upgrade -i kubedb-crds ak8sdb/kubedb-crds -n kubedb --create-namespace --version=v2024.1.9
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys KubeDB crds on a [Kubernetes](http://kubernetes.io) cluster u
 To install/upgrade the chart with the release name `kubedb-crds`:
 
 ```bash
-$ helm upgrade -i kubedb-crds ak8sdb/kubedb-crds -n kubedb --create-namespace --version=v2023.03.20
+$ helm upgrade -i kubedb-crds ak8sdb/kubedb-crds -n kubedb --create-namespace --version=v2024.1.9
 ```
 
 The command deploys KubeDB crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
