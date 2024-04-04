@@ -25,7 +25,6 @@ $ helm upgrade -i kubedb ak8sdb/kubedb \
   --set global.featureGates.MongoDB=false \
   --set-file global.license=/path/to/license.txt
 
-
 # enable only MongoDB
 $ helm upgrade -i kubedb ak8sdb/kubedb \
   --set global.featureGates.Elasticsearch=false \
