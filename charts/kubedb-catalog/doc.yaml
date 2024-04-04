@@ -5,14 +5,14 @@ project:
   description: Catalog of database versions supported by KubeDB
   app: KubeDB catalog
 repository:
-  url: https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-  name: ak8sdb
+  url: https://charts.appscode.com/stable/
+  name: appscode
 chart:
   name: kubedb-catalog
   values: -- generate from values file --
   valuesExample: -- generate from values file --
 prerequisites:
-- Kubernetes 1.14+
+- Kubernetes 1.20+
 release:
   name: kubedb-catalog
   namespace: kubedb

@@ -1,4 +1,10 @@
-{{ if .Values.catalog.elasticsearch }}
+{{ $featureGates := .Values.featureGates }}
+{{- if .Values.global }}
+  {{ $featureGates = mergeOverwrite dict .Values.featureGates .Values.global.featureGates }}
+{{- end }}
+
+{{ if $featureGates.Elasticsearch }}
+
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
@@ -8,13 +14,13 @@ metadata:
 spec:
   authPlugin: X-Pack
   db:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch:7.14.0-xpack-v2021.08.23'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch") $) }}:7.14.0-xpack-v2021.08.23'
   distribution: KubeDB
   exporter:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "prometheuscommunity") .Values) }}/elasticsearch-exporter:v1.3.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "prometheuscommunity/elasticsearch-exporter") $) }}:v1.3.0'
   initContainer:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "tianon") .Values) }}/toybox:0.8.4'
-    yqImage: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch:7.14.0-xpack-v2021.08.23'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "tianon/toybox") $) }}:0.8.4'
+    yqImage: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch") $) }}:7.14.0-xpack-v2021.08.23'
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   securityContext:

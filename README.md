@@ -8,30 +8,33 @@ $ helm repo update
 
 $ helm search repo kubedb
 NAME                                CHART VERSION APP VERSION DESCRIPTION
-ak8sdb/kubedb                       v2024.1.9     v2024.1.9   KubeDB by AppsCode - Production ready databases...
-ak8sdb/kubedb-autoscaler            v2024.1.9     v2024.1.9   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
-ak8sdb/kubedb-catalog               v2024.1.9     v2024.1.9   KubeDB Catalog by AppsCode - Catalog for databa...
-ak8sdb/kubedb-community             v2024.1.9     v2024.1.9   KubeDB Community by AppsCode - Community featur...
-ak8sdb/kubedb-crds                  v2024.1.9     v2024.1.9   KubeDB and Stash crds
-ak8sdb/kubedb-enterprise            v2024.1.9     v2024.1.9   KubeDB Enterprise by AppsCode - Enterprise feat...
+ak8sdb/kubedb                       v2024.4.4     v2024.4.4   KubeDB by AppsCode - Production ready databases...
+ak8sdb/kubedb-autoscaler            v2024.4.4     v2024.4.4   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
+ak8sdb/kubedb-catalog               v2024.4.4     v2024.4.4   KubeDB Catalog by AppsCode - Catalog for databa...
+ak8sdb/kubedb-community             v2024.4.4     v2024.4.4   KubeDB Community by AppsCode - Community featur...
+ak8sdb/kubedb-crds                  v2024.4.4     v2024.4.4   KubeDB and Stash crds
+ak8sdb/kubedb-enterprise            v2024.4.4     v2024.4.4   KubeDB Enterprise by AppsCode - Enterprise feat...
 
+# enable both Elasticsearch and MongoDB
 $ helm upgrade -i kubedb ak8sdb/kubedb \
   --set-file global.license=/path/to/license.txt
 
-NAME: kubedb
-LAST DEPLOYED: Sun Mar 21 18:09:41 2021
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-Get the KubeDB operator pods by running the following command:
+# enable only Elasticsearch
+$ helm upgrade -i kubedb ak8sdb/kubedb \
+  --set global.featureGates.Elasticsearch=true \
+  --set global.featureGates.MongoDB=false \
+  --set-file global.license=/path/to/license.txt
 
-  kubectl --namespace default get pods
+
+# enable only MongoDB
+$ helm upgrade -i kubedb ak8sdb/kubedb \
+  --set global.featureGates.Elasticsearch=false \
+  --set global.featureGates.MongoDB=true \
+  --set-file global.license=/path/to/license.txt
 
 $ helm ls
 NAME  	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
-kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2024.1.9	v2024.1.9
+kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2024.4.4	v2024.4.4
 
 $ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -52,4 +55,17 @@ kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
 ```bash
 make update-charts
 ./hack/scripts/update-repo.sh
+```
+
+## Development
+
+```bash
+helm dependency update charts/kubedb
+
+helm upgrade -i kubedb charts/kubedb \
+  --set global.featureGates.Elasticsearch=true \
+  --set global.featureGates.MongoDB=false \
+  --set-file global.license=/path/to/license.txt
+
+watch kubectl get crds,pods
 ```
