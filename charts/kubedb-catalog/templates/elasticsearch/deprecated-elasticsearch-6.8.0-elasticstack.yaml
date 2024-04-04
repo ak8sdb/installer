@@ -1,4 +1,10 @@
-{{ if and .Values.catalog.elasticsearch (not .Values.skipDeprecated) }}
+{{ $featureGates := .Values.featureGates }}
+{{- if .Values.global }}
+  {{ $featureGates = mergeOverwrite dict .Values.featureGates .Values.global.featureGates }}
+{{- end }}
+
+{{ if $featureGates.Elasticsearch }}
+{{ if or (not .Values.skipDeprecated) (has "6.8" .Values.enableVersions.Elasticsearch) }}
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
@@ -8,21 +14,21 @@ metadata:
 spec:
   authPlugin: X-Pack
   db:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch:6.8'
-  deprecated: true
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch") $) }}:6.8'
   distribution: ElasticStack
   exporter:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch_exporter:1.0.2'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch_exporter") $) }}:1.0.2'
   initContainer:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/busybox'
-    yqImage: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/yq:2.4.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/busybox") $) }}'
+    yqImage: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/yq") $) }}:2.4.0'
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   version: 6.8.0
+  deprecated: {{ not (has "6.8" .Values.enableVersions.Elasticsearch) }}
 {{ end }}
 
 ---
-{{ if and .Values.catalog.elasticsearch (not .Values.skipDeprecated) }}
+{{ if or (not .Values.skipDeprecated) (has "6.8.0" .Values.enableVersions.Elasticsearch) }}
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
@@ -32,15 +38,16 @@ metadata:
 spec:
   authPlugin: X-Pack
   db:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch:6.8'
-  deprecated: true
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch") $) }}:6.8'
   distribution: ElasticStack
   exporter:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch_exporter:1.0.2'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch_exporter") $) }}:1.0.2'
   initContainer:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/busybox'
-    yqImage: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/yq:2.4.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/busybox") $) }}'
+    yqImage: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/yq") $) }}:2.4.0'
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   version: 6.8.0
+  deprecated: {{ not (has "6.8.0" .Values.enableVersions.Elasticsearch) }}
+{{ end }}
 {{ end }}

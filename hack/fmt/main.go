@@ -21,7 +21,6 @@ import (
 	"encoding/json"
 	goflag "flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sort"
@@ -41,12 +40,12 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"kmodules.xyz/client-go/tools/parser"
+	"kmodules.xyz/go-containerregistry/name"
 	"sigs.k8s.io/yaml"
 	stash "stash.appscode.dev/installer/catalog"
 )
 
 const (
-	registryKubeDB = "kubedb"
 	distroOfficial = "Official"
 )
 
@@ -126,13 +125,13 @@ func main() {
 	flag.CommandLine.AddGoFlagSet(goflag.CommandLine)
 	flag.Parse()
 
-	resources, err := parser.ListPathResources(filepath.Join(dir, "catalog", "raw"))
+	resources, err := parser.ListPathResources(filepath.Join(dir, "catalog",  "raw"))
 	if err != nil {
 		panic(err)
 	}
 
 	dbStore := map[DbVersion][]*unstructured.Unstructured{}
-	pspForDBs := map[DB]sets.String{}
+	pspForDBs := map[DB]sets.Set[string]{}
 	pspStore := map[string]*unstructured.Unstructured{}
 
 	// active versions
@@ -160,8 +159,8 @@ func main() {
 
 		for jp, val := range specUpdates {
 			if apiKind == "" || apiKind == ri.Object.GetKind() {
-				if _, ok, _ := unstructured.NestedFieldNoCopy(ri.Object.Object, strings.Split(jp, ".")...); ok {
-					err = unstructured.SetNestedField(ri.Object.Object, val, strings.Split(jp, ".")...)
+				if ref, ok, _ := unstructured.NestedString(ri.Object.Object, strings.Split(jp, ".")...); ok {
+					err = unstructured.SetNestedField(ri.Object.Object, encodeTag(ref, val), strings.Split(jp, ".")...)
 					if err != nil {
 						panic(fmt.Sprintf("failed to set %s to %s in group=%s,kind=%s,name=%s", jp, val, ri.Object.GetAPIVersion(), ri.Object.GetKind(), ri.Object.GetName()))
 					}
@@ -209,8 +208,11 @@ func main() {
 						distro = "Percona"
 					}
 					if img, ok, _ := unstructured.NestedString(ri.Object.UnstructuredContent(), "spec", "db", "image"); ok {
-						_, repo, _, _ := ParseImage(img)
-						if repo == "mysql" {
+						ref, err := name.ParseReference(img)
+						if err != nil {
+							panic(err)
+						}
+						if ref.Registry == "mysql" {
 							distro = "MySQL"
 						}
 					}
@@ -229,6 +231,11 @@ func main() {
 					if err != nil {
 						panic(err)
 					}
+				}
+			} else if dbKind == "KafkaConnector" {
+				connectorType, _, _ := unstructured.NestedString(ri.Object.Object, "spec", "type")
+				if distro == "" {
+					distro = connectorType
 				}
 			}
 
@@ -254,7 +261,7 @@ func main() {
 					Kind:  ri.Object.GetKind(),
 				}
 				if _, ok := pspForDBs[dbKey]; !ok {
-					pspForDBs[dbKey] = sets.NewString()
+					pspForDBs[dbKey] = sets.New[string]()
 				}
 				pspForDBs[dbKey].Insert(pspName)
 			}
@@ -327,13 +334,13 @@ func main() {
 			panic(err)
 		}
 
-		filename := filepath.Join(dir, "catalog", "active_versions.json")
+		filename := filepath.Join(dir, "catalog",  "active_versions.json")
 		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0o644)
+		err = os.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -352,13 +359,13 @@ func main() {
 			panic(err)
 		}
 
-		filename := filepath.Join(dir, "catalog", "backup_tasks.json")
+		filename := filepath.Join(dir, "catalog",  "backup_tasks.json")
 		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0o644)
+		err = os.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -377,13 +384,13 @@ func main() {
 			panic(err)
 		}
 
-		filename := filepath.Join(dir, "catalog", "restore_tasks.json")
+		filename := filepath.Join(dir, "catalog",  "restore_tasks.json")
 		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, data, 0o644)
+		err = os.WriteFile(filename, data, 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -424,13 +431,13 @@ func main() {
 		if k.Distro != "" {
 			filenameparts = append(filenameparts, strings.ToLower(k.Distro))
 		}
-		filename := filepath.Join(dir, "catalog", "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s.yaml", strings.Join(filenameparts, "-")))
+		filename := filepath.Join(dir, "catalog",  "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s.yaml", strings.Join(filenameparts, "-")))
 		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
+		err = os.WriteFile(filename, buf.Bytes(), 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -442,7 +449,7 @@ func main() {
 		}
 
 		var buf bytes.Buffer
-		for i, pspName := range v.List() {
+		for i, pspName := range sets.List[string](v) {
 			if i > 0 {
 				buf.WriteString("\n---\n")
 			}
@@ -454,13 +461,13 @@ func main() {
 		}
 
 		dbKind := strings.TrimSuffix(k.Kind, "Version")
-		filename := filepath.Join(dir, "catalog", "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s-psp.yaml", strings.ToLower(dbKind)))
+		filename := filepath.Join(dir, "catalog",  "new_raw", strings.ToLower(dbKind), fmt.Sprintf("%s-psp.yaml", strings.ToLower(dbKind)))
 		err = os.MkdirAll(filepath.Dir(filename), 0o755)
 		if err != nil {
 			panic(err)
 		}
 
-		err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
+		err = os.WriteFile(filename, buf.Bytes(), 0o644)
 		if err != nil {
 			panic(err)
 		}
@@ -468,11 +475,11 @@ func main() {
 
 	{
 		// move new_raw to raw
-		err = os.RemoveAll(filepath.Join(dir, "catalog", "raw"))
+		err = os.RemoveAll(filepath.Join(dir, "catalog",  "raw"))
 		if err != nil {
 			panic(err)
 		}
-		err = os.Rename(filepath.Join(dir, "catalog", "new_raw"), filepath.Join(dir, "catalog", "raw"))
+		err = os.Rename(filepath.Join(dir, "catalog",  "new_raw"), filepath.Join(dir, "catalog",  "raw"))
 		if err != nil {
 			panic(err)
 		}
@@ -482,37 +489,51 @@ func main() {
 	{
 		for k, v := range dbStore {
 			dbKind := strings.TrimSuffix(k.Kind, "Version")
-			var buf bytes.Buffer
 
-			for i, obj := range v {
-				obj := obj.DeepCopy()
+			copies := make([]map[string]any, 0, len(v))
+			for _, obj := range v {
+				objCopy := obj.DeepCopy()
 
-				spec, _, err := unstructured.NestedMap(obj.Object, "spec")
+				spec, _, err := unstructured.NestedMap(objCopy.Object, "spec")
 				if err != nil {
 					panic(err)
 				}
 				for prop := range spec {
-					templatizeRegistry := func(field string) {
-						img, ok, _ := unstructured.NestedString(obj.Object, "spec", prop, field)
+					templatizeRegistry := func(fields ...string) {
+						fieldList := append([]string{"spec", prop}, fields...)
+						img, ok, _ := unstructured.NestedString(objCopy.Object, fieldList...)
 						if ok {
-							reg, repo, bin, tag := ParseImage(img)
-							var newimg string
-							switch {
-							case tag == "" && (reg != "" || repo != ""):
-								newimg = fmt.Sprintf(`{{ include "catalog.registry" (merge (dict "_reg" "%s" "_repo" "%s") .Values) }}/%s`, reg, repo, bin)
-							case tag != "" && (reg != "" || repo != ""):
-								newimg = fmt.Sprintf(`{{ include "catalog.registry" (merge (dict "_reg" "%s" "_repo" "%s") .Values) }}/%s:%s`, reg, repo, bin, tag)
-							case tag == "":
-								newimg = fmt.Sprintf(`{{ include "official.registry" (merge (dict "_bin" "%s") .Values) }}`, bin)
-							default:
-								newimg = fmt.Sprintf(`{{ include "official.registry" (merge (dict "_bin" "%s") .Values) }}:%s`, bin, tag)
-
-								// case tag == "":
-								//	newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}`, bin)
-								// default:
-								//	newimg = fmt.Sprintf(`{{ include "official.registry" (set (.Values | deepCopy) "officialRegistry" (list %q)) }}:%s`, bin, tag)
+							decodedImg := decodeTag(img)
+							ref, err := name.ParseReference(decodedImg)
+							if err != nil {
+								panic(err)
 							}
-							err = unstructured.SetNestedField(obj.Object, newimg, "spec", prop, field)
+
+							err = unstructured.SetNestedField(obj.Object, decodedImg, fieldList...)
+							if err != nil {
+								panic(err)
+							}
+
+							var newimg string
+							switch ref.Registry {
+							case "index.docker.io":
+								_, bin, found := strings.Cut(ref.Repository, "library/")
+								if found {
+									newimg = fmt.Sprintf(`{{ include "image.dockerLibrary" (merge (dict "_repo" "%s") $) }}`, bin)
+								} else {
+									newimg = fmt.Sprintf(`{{ include "image.dockerHub" (merge (dict "_repo" "%s") $) }}`, ref.Repository)
+								}
+							case "ghcr.io":
+								newimg = fmt.Sprintf(`{{ include "image.ghcr" (merge (dict "_repo" "%s") $) }}`, ref.Repository)
+							case "registry.k8s.io":
+								newimg = fmt.Sprintf(`{{ include "image.kubernetes" (merge (dict "_repo" "%s") $) }}`, ref.Repository)
+							default:
+								panic("unsupported registry for image " + img)
+							}
+							if ref.Tag != "" && ref.Tag != "latest" {
+								newimg += ":" + ref.Tag
+							}
+							err = unstructured.SetNestedField(objCopy.Object, newimg, fieldList...)
 							if err != nil {
 								panic(err)
 							}
@@ -520,24 +541,44 @@ func main() {
 					}
 					templatizeRegistry("image")
 					templatizeRegistry("yqImage")
+					templatizeRegistry("walg", "image")
 				}
+				copies = append(copies, objCopy.UnstructuredContent())
 
-				if i > 0 {
-					buf.WriteString("\n---\n")
-				}
+				//if i > 0 {
+				//	buf.WriteString("\n---\n")
+				//}
 
-				data := map[string]interface{}{
-					"key":    strings.ToLower(dbKind),
-					"object": obj.Object,
-				}
-				funcMap := sprig.TxtFuncMap()
-				funcMap["toYaml"] = toYAML
-				funcMap["toJson"] = toJSON
-				tpl := template.Must(template.New("").Funcs(funcMap).Parse(templates.DBVersion))
-				err = tpl.Execute(&buf, &data)
-				if err != nil {
-					panic(err)
-				}
+				//data := map[string]interface{}{
+				//	"kind":   dbKind,
+				//	"object": objCopy.Object,
+				//}
+				//funcMap := sprig.TxtFuncMap()
+				//funcMap["toYaml"] = toYAML
+				//funcMap["toJson"] = toJSON
+				//tpl := template.Must(template.New("").Funcs(funcMap).Parse(templates.DBVersion))
+				//err = tpl.Execute(&buf, &data)
+				//if err != nil {
+				//	panic(err)
+				//}
+			}
+
+			tempKind := dbKind
+			if dbKind == "KafkaConnector" {
+				tempKind = "Kafka"
+			}
+			data := map[string]interface{}{
+				"kind":    tempKind,
+				"objects": copies,
+			}
+			funcMap := sprig.TxtFuncMap()
+			funcMap["toYaml"] = toYAML
+			funcMap["toJson"] = toJSON
+			tpl := template.Must(template.New("").Funcs(funcMap).Parse(templates.DBVersion))
+			var buf bytes.Buffer
+			err = tpl.Execute(&buf, &data)
+			if err != nil {
+				panic(err)
 			}
 
 			var filenameparts []string
@@ -554,7 +595,7 @@ func main() {
 				panic(err)
 			}
 
-			err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
+			err = os.WriteFile(filename, buf.Bytes(), 0o644)
 			if err != nil {
 				panic(err)
 			}
@@ -568,7 +609,7 @@ func main() {
 			dbKind := strings.TrimSuffix(k.Kind, "Version")
 
 			var buf bytes.Buffer
-			for i, pspName := range v.List() {
+			for i, pspName := range sets.List[string](v) {
 				if i > 0 {
 					buf.WriteString("\n---\n")
 				}
@@ -581,7 +622,7 @@ func main() {
 				unstructured.RemoveNestedField(content, "spec", "allowPrivilegeEscalation")
 				unstructured.RemoveNestedField(content, "spec", "privileged")
 				data := map[string]interface{}{
-					"key":    strings.ToLower(dbKind),
+					"kind":   dbKind,
 					"object": content,
 				}
 				funcMap := sprig.TxtFuncMap()
@@ -600,7 +641,7 @@ func main() {
 				panic(err)
 			}
 
-			err = ioutil.WriteFile(filename, buf.Bytes(), 0o644)
+			err = os.WriteFile(filename, buf.Bytes(), 0o644)
 			if err != nil {
 				panic(err)
 			}
@@ -653,7 +694,7 @@ func main() {
 		sh.SetDir(dir)
 		sh.ShowCMD = true
 
-		out, err := sh.Command("helm", "template", "charts/kubedb-catalog", "--api-versions", "policy/v1beta1/PodSecurityPolicy", "--set", "skipDeprecated=false").Output()
+		out, err := sh.Command("helm", "template", "charts/kubedb-catalog", "--api-versions", "policy/v1beta1/PodSecurityPolicy", "--set", "skipDeprecated=false", "--set", "psp.enabled=true").Output()
 		if err != nil {
 			panic(err)
 		}
@@ -728,27 +769,6 @@ func main() {
 	}
 }
 
-func ParseImage(s string) (reg, repo, bin, tag string) {
-	idx := strings.IndexRune(s, ':')
-	if idx != -1 {
-		tag = s[idx+1:]
-		s = s[:idx]
-	}
-	parts := strings.Split(s, "/")
-	if len(parts) >= 1 {
-		bin = parts[len(parts)-1]
-		parts = parts[:len(parts)-1]
-	}
-	if len(parts) >= 1 {
-		repo = parts[len(parts)-1]
-		parts = parts[:len(parts)-1]
-	}
-	if len(parts) > 0 {
-		reg = strings.Join(parts, "/")
-	}
-	return
-}
-
 func allDeprecated(objs []*unstructured.Unstructured) bool {
 	for _, obj := range objs {
 		d, _, _ := unstructured.NestedBool(obj.Object, "spec", "deprecated")
@@ -788,7 +808,7 @@ func toJSON(v interface{}) string {
 func StashAddonDBType(dbKind string) string {
 	switch dbKind {
 	case "PerconaXtraDB":
-		return "percona-xtradb"
+		return "perconaxtradb"
 	default:
 		return strings.ToLower(dbKind)
 	}
@@ -854,4 +874,31 @@ func Compare(i, j string) bool {
 		return semvers.Compare(ver_i, ver_j)
 	}
 	return strings.Compare(i, j) < 0
+}
+
+func encodeTag(ref, tag string) string {
+	if idx := strings.IndexRune(ref, '('); idx == -1 {
+		return tag
+	}
+
+	var sb strings.Builder
+	replace := false
+	for _, ch := range ref {
+		if ch == '(' {
+			replace = true
+			sb.WriteRune('(')
+			sb.WriteString(tag)
+			sb.WriteRune(')')
+		} else if ch == ')' {
+			replace = false
+		} else if !replace {
+			sb.WriteRune(ch)
+		}
+	}
+	return sb.String()
+}
+
+func decodeTag(ref string) string {
+	r := strings.NewReplacer("(", "", ")", "")
+	return r.Replace(ref)
 }

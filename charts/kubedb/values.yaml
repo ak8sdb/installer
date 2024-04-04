@@ -43,21 +43,13 @@ global:
       # Only usable when monitoring agent is `prometheus.io/operator`.
       labels: {}
 
+  featureGates:
+    Elasticsearch: true
+    MongoDB: true
+
 kubedb-catalog:
   # If enabled, installs the kubedb-catalog chart
   enabled: true
-  catalog:
-    elasticsearch: true
-    etcd: false
-    memcached: false
-    mongo: true
-    mysql: false
-    mariadb: false
-    perconaxtradb: false
-    pgbouncer: false
-    postgres: false
-    proxysql: false
-    redis: false
 kubedb-community:
   # If enabled, installs the kubedb-community chart
   enabled: true

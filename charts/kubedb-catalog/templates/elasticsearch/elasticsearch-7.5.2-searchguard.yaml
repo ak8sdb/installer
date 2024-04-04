@@ -1,4 +1,10 @@
-{{ if .Values.catalog.elasticsearch }}
+{{ $featureGates := .Values.featureGates }}
+{{- if .Values.global }}
+  {{ $featureGates = mergeOverwrite dict .Values.featureGates .Values.global.featureGates }}
+{{- end }}
+
+{{ if $featureGates.Elasticsearch }}
+
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
@@ -8,13 +14,13 @@ metadata:
 spec:
   authPlugin: SearchGuard
   db:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "floragunncom") .Values) }}/sg-elasticsearch:7.5.2-oss-40.0.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "floragunncom/sg-elasticsearch") $) }}:7.5.2-oss-40.0.0'
   distribution: SearchGuard
   exporter:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "prometheuscommunity") .Values) }}/elasticsearch-exporter:v1.3.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "prometheuscommunity/elasticsearch-exporter") $) }}:v1.3.0'
   initContainer:
-    image: '{{ include "official.registry" (merge (dict "_bin" "busybox") .Values) }}:1.32.0'
-    yqImage: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch-init:7.5.2-searchguard'
+    image: '{{ include "image.dockerLibrary" (merge (dict "_repo" "busybox") $) }}:1.32.0'
+    yqImage: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch-init") $) }}:7.5.2-searchguard'
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   stash:
@@ -27,10 +33,9 @@ spec:
       restoreTask:
         name: elasticsearch-restore-7.3.2
   version: 7.5.2
-{{ end }}
 
 ---
-{{ if .Values.catalog.elasticsearch }}
+
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
@@ -40,13 +45,13 @@ metadata:
 spec:
   authPlugin: SearchGuard
   db:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "floragunncom") .Values) }}/sg-elasticsearch:7.5.2-oss-40.0.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "floragunncom/sg-elasticsearch") $) }}:7.5.2-oss-40.0.0'
   distribution: SearchGuard
   exporter:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "prometheuscommunity") .Values) }}/elasticsearch-exporter:v1.3.0'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "prometheuscommunity/elasticsearch-exporter") $) }}:v1.3.0'
   initContainer:
-    image: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "tianon") .Values) }}/toybox:0.8.4'
-    yqImage: '{{ include "catalog.registry" (merge (dict "_reg" "" "_repo" "kubedb") .Values) }}/elasticsearch-init:7.5.2-searchguard-v1'
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "tianon/toybox") $) }}:0.8.4'
+    yqImage: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/elasticsearch-init") $) }}:7.5.2-searchguard-v1'
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   securityContext:
