@@ -1,5 +1,6 @@
 {
   "Elasticsearch": [
+    "xpack-8.14.1",
     "xpack-8.8.0",
     "xpack-8.6.2",
     "xpack-7.17.10",
