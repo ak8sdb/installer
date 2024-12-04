@@ -60,11 +60,11 @@ pushgateway:
   # runAsUser: 1000
 cleaner:
   # Docker registry used to pull Webhook cleaner image
-  registry: appscode
+  registry: ghcr.io/appscode
   # Webhook cleaner container image
   repository: kubectl
   # Webhook cleaner container image tag
-  tag: v1.16
+  tag: v1.31
   # Skip generating cleaner YAML
   skip: false
 # Specify an array of imagePullSecrets.
