@@ -3,7 +3,7 @@ entries:
   kubedb:
   - apiVersion: v2
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.179398652+06:00"
+    created: "2024-12-04T20:26:57.767122325+06:00"
     dependencies:
     - condition: kubedb-catalog.enabled
       name: kubedb-catalog
@@ -30,7 +30,7 @@ entries:
       repository: file://../stash-catalog
       version: v2024.12.4
     description: KubeDB by AppsCode - Production ready databases on Kubernetes
-    digest: 35fb8c1c85e897acb468129343128fe9f81e8e3302f4278cd7487f207aa47227
+    digest: ef780b0b2cf2e787672c0990f6d306980708bfeb7777e65daecbc9394dc1e78e
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-icon.png
     maintainers:
@@ -718,9 +718,9 @@ entries:
   kubedb-autoscaler:
   - apiVersion: v1
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.179975688+06:00"
+    created: "2024-12-04T20:26:57.767672883+06:00"
     description: KubeDB Autoscaler by AppsCode - Autoscale KubeDB operated Databases
-    digest: 7ec4f371037cc10e95bf30c766c618395fa4e9d497fef657068a88cc1a1883f3
+    digest: 4f99a01d617f26532b1e083d06e7cb13c0eb9f74674840a7eafcf4f3eb049178
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-autoscaler-icon.png
     maintainers:
@@ -863,9 +863,9 @@ entries:
   kubedb-catalog:
   - apiVersion: v1
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.181280756+06:00"
+    created: "2024-12-04T20:26:57.768838534+06:00"
     description: KubeDB Catalog by AppsCode - Catalog for database versions
-    digest: 5e3ff0c5f8936a28a09e92ccd3ee2810487061fd5db17b708e763507f5457073
+    digest: 1bf8f5e85cfa25975e7effa6e8ea4fd5b2c6bf3c8bbeb516f76aeeab819ffa0c
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/icon/kubedb.png
     maintainers:
@@ -1040,9 +1040,9 @@ entries:
   kubedb-community:
   - apiVersion: v1
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.18182776+06:00"
+    created: "2024-12-04T20:26:57.769375614+06:00"
     description: KubeDB Community by AppsCode - Community features for KubeDB
-    digest: 965999e3576fc7204efc150f8b243ae21a5cdb6855e21c1d9811e7016f6cda2e
+    digest: be43b1a598eddf1bdeddac4028cf1762b2adcb8cfe489dc2246248fe244d015d
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-community-icon.png
     maintainers:
@@ -1217,9 +1217,9 @@ entries:
   kubedb-crds:
   - apiVersion: v2
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.185321539+06:00"
+    created: "2024-12-04T20:26:57.773362153+06:00"
     description: KubeDB and Stash crds
-    digest: db7af4303f1b73645f10dee9650869963ce0cdafafba49b410334a04b7ceebc6
+    digest: 5dc651482fe71fa185b548f60fc682d59bd6bb89436a6b2323b53ce802013d20
     name: kubedb-crds
     type: application
     urls:
@@ -1368,9 +1368,9 @@ entries:
   kubedb-enterprise:
   - apiVersion: v1
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.185766713+06:00"
+    created: "2024-12-04T20:26:57.77382576+06:00"
     description: KubeDB Enterprise by AppsCode - Enterprise features for KubeDB
-    digest: 506e3442e29bb9848a8b0872c2b0850098c1708f396eac09023d6278548ff1d1
+    digest: 1254838c62e82f86888fc65f5b10314fab7f7f4963d04ed6c72114717a895437
     home: https://kubedb.com
     icon: https://cdn.appscode.com/images/products/kubedb/kubedb-enterprise-icon.png
     maintainers:
@@ -1545,9 +1545,9 @@ entries:
   stash-catalog:
   - apiVersion: v2
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.186766921+06:00"
+    created: "2024-12-04T20:26:57.774887836+06:00"
     description: Stash Catalog by AppsCode - Catalog of Stash Addons
-    digest: 6222fd7bb974926634f68b1d75f6e5211ecfbfe6b586aaa8ab9e98a691474529
+    digest: 9acf818be9eaa09860a58b913868388caefe2214f62c3842c7b6bac52678b4bc
     home: https://stash.run
     icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
     maintainers:
@@ -1631,9 +1631,9 @@ entries:
   stash-community:
   - apiVersion: v1
     appVersion: v2024.12.4
-    created: "2024-12-04T20:01:00.187422109+06:00"
+    created: "2024-12-04T20:26:57.775635696+06:00"
     description: Free community features for Stash by AppsCode
-    digest: 5a00abd951722567dec1772e0d5bf56c87c5ba0c1f00a37ca16f68ad2f910d36
+    digest: 076ad93d693d706da1d1d99375b98b9cce5555624ebebf3abb11ea4c57d3e275
     home: https://stash.run
     icon: https://cdn.appscode.com/images/products/stash/stash-community-icon.png
     maintainers:
@@ -1709,4 +1709,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/ak8sdb/installer/master/stable/stash-community/stash-community-v2022.02.22.tgz
     version: v2022.02.22
-generated: "2024-12-04T20:01:00.175358009+06:00"
+generated: "2024-12-04T20:26:57.763127334+06:00"
