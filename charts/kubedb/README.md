@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add ak8sdb https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo ak8sdb/kubedb --version=v2024.1.9
-$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.1.9
+$ helm search repo ak8sdb/kubedb --version=v2024.12.4
+$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.12.4
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys a KubeDB operator on a [Kubernetes](http://kubernetes.io) clu
 To install/upgrade the chart with the release name `kubedb`:
 
 ```bash
-$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.1.9
+$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.12.4
 ```
 
 The command deploys a KubeDB operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -55,18 +55,9 @@ The following table lists the configurable parameters of the `kubedb` chart and 
 | global.monitoring.enabled               | If true, enables monitoring KubeDB operator                                                                                                                                                                                                                                                                                                                           | <code>false</code>          |
 | global.monitoring.agent                 | Name of monitoring agent ("prometheus.io" or "prometheus.io/operator" or "prometheus.io/builtin")                                                                                                                                                                                                                                                                     | <code>""</code>             |
 | global.monitoring.serviceMonitor.labels | Specify the labels for ServiceMonitor. Prometheus crd will select ServiceMonitor using these labels. Only usable when monitoring agent is `prometheus.io/operator`.                                                                                                                                                                                                   | <code>{}</code>             |
+| global.featureGates.Elasticsearch       |                                                                                                                                                                                                                                                                                                                                                                       | <code>true</code>           |
+| global.featureGates.MongoDB             |                                                                                                                                                                                                                                                                                                                                                                       | <code>true</code>           |
 | kubedb-catalog.enabled                  | If enabled, installs the kubedb-catalog chart                                                                                                                                                                                                                                                                                                                         | <code>true</code>           |
-| kubedb-catalog.catalog.elasticsearch    |                                                                                                                                                                                                                                                                                                                                                                       | <code>true</code>           |
-| kubedb-catalog.catalog.etcd             |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.memcached        |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.mongo            |                                                                                                                                                                                                                                                                                                                                                                       | <code>true</code>           |
-| kubedb-catalog.catalog.mysql            |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.mariadb          |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.perconaxtradb    |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.pgbouncer        |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.postgres         |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.proxysql         |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
-| kubedb-catalog.catalog.redis            |                                                                                                                                                                                                                                                                                                                                                                       | <code>false</code>          |
 | kubedb-community.enabled                | If enabled, installs the kubedb-community chart                                                                                                                                                                                                                                                                                                                       | <code>true</code>           |
 | kubedb-community.operator.registry      | Docker registry used to pull KubeDB enterprise operator image                                                                                                                                                                                                                                                                                                         | <code>ghcr.io/ak8sdb</code> |
 | kubedb-enterprise.enabled               | If enabled, installs the kubedb-enterprise chart                                                                                                                                                                                                                                                                                                                      | <code>true</code>           |
@@ -87,12 +78,12 @@ The following table lists the configurable parameters of the `kubedb` chart and 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.1.9 --set kubedb-community.operator.registry=ghcr.io/ak8sdb
+$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.12.4 --set kubedb-community.operator.registry=ghcr.io/ak8sdb
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.1.9 --values values.yaml
+$ helm upgrade -i kubedb ak8sdb/kubedb -n kube-system --create-namespace --version=v2024.12.4 --values values.yaml
 ```
