@@ -8,12 +8,12 @@ $ helm repo update
 
 $ helm search repo kubedb
 NAME                                CHART VERSION APP VERSION DESCRIPTION
-ak8sdb/kubedb                       v2024.12.4     v2024.12.4   KubeDB by AppsCode - Production ready databases...
-ak8sdb/kubedb-autoscaler            v2024.12.4     v2024.12.4   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
-ak8sdb/kubedb-catalog               v2024.12.4     v2024.12.4   KubeDB Catalog by AppsCode - Catalog for databa...
-ak8sdb/kubedb-community             v2024.12.4     v2024.12.4   KubeDB Community by AppsCode - Community featur...
-ak8sdb/kubedb-crds                  v2024.12.4     v2024.12.4   KubeDB and Stash crds
-ak8sdb/kubedb-enterprise            v2024.12.4     v2024.12.4   KubeDB Enterprise by AppsCode - Enterprise feat...
+ak8sdb/kubedb                       v2025.3.17     v2025.3.17   KubeDB by AppsCode - Production ready databases...
+ak8sdb/kubedb-autoscaler            v2025.3.17     v2025.3.17   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
+ak8sdb/kubedb-catalog               v2025.3.17     v2025.3.17   KubeDB Catalog by AppsCode - Catalog for databa...
+ak8sdb/kubedb-community             v2025.3.17     v2025.3.17   KubeDB Community by AppsCode - Community featur...
+ak8sdb/kubedb-crds                  v2025.3.17     v2025.3.17   KubeDB and Stash crds
+ak8sdb/kubedb-enterprise            v2025.3.17     v2025.3.17   KubeDB Enterprise by AppsCode - Enterprise feat...
 
 # enable both Elasticsearch and MongoDB
 $ helm upgrade -i kubedb ak8sdb/kubedb \
@@ -33,7 +33,7 @@ $ helm upgrade -i kubedb ak8sdb/kubedb \
 
 $ helm ls
 NAME  	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
-kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2024.12.4	v2024.12.4
+kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2025.3.17	v2025.3.17
 
 $ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -53,6 +53,7 @@ kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
 
 ```bash
 make update-charts
+helm dependency build charts/kubedb
 ./hack/scripts/update-repo.sh
 ```
 
