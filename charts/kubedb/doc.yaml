@@ -6,7 +6,7 @@ project:
   app: a KubeDB operator
 repository:
   url: https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-  name: ak8sdb
+  name: appscode
 chart:
   name: kubedb
   values: -- generate from values file --

@@ -6,7 +6,7 @@ project:
   app: KubeDB crds
 repository:
   url: https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-  name: ak8sdb
+  name: appscode
 chart:
   name: kubedb-crds
   values: -- generate from values file --

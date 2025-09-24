@@ -6,7 +6,7 @@ project:
   app: a KubeDB Autoscaler operator
 repository:
   url: https://raw.githubusercontent.com/ak8sdb/installer/master/stable
-  name: ak8sdb
+  name: appscode
 chart:
   name: kubedb-autoscaler
   values: -- generate from values file --
