@@ -67,6 +67,8 @@
     "kubedb-xpack-7.12.0"
   ],
   "elasticsearch-restore-8.2.0": [
+    "xpack-9.1.4",
+    "xpack-9.1.3",
     "xpack-8.14.1",
     "xpack-8.8.0",
     "xpack-8.6.2"
