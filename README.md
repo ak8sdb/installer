@@ -52,7 +52,9 @@ kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
 ## Update Helm Chart Repository
 
 ```bash
-make update-charts
+go run ./hack/fmt/main.go
+
+make update-charts CHART_VERSION=$VERSION CHART_REGISTRY=appscode
 helm dependency build charts/kubedb
 ./hack/scripts/update-repo.sh
 ```
