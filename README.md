@@ -8,12 +8,12 @@ $ helm repo update
 
 $ helm search repo kubedb
 NAME                                CHART VERSION APP VERSION DESCRIPTION
-ak8sdb/kubedb                       v2025.9.26     v2025.9.26   KubeDB by AppsCode - Production ready databases...
-ak8sdb/kubedb-autoscaler            v2025.9.26     v2025.9.26   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
-ak8sdb/kubedb-catalog               v2025.9.26     v2025.9.26   KubeDB Catalog by AppsCode - Catalog for databa...
-ak8sdb/kubedb-community             v2025.9.26     v2025.9.26   KubeDB Community by AppsCode - Community featur...
-ak8sdb/kubedb-crds                  v2025.9.26     v2025.9.26   KubeDB and Stash crds
-ak8sdb/kubedb-enterprise            v2025.9.26     v2025.9.26   KubeDB Enterprise by AppsCode - Enterprise feat...
+ak8sdb/kubedb                       v2025.12.15     v2025.12.15   KubeDB by AppsCode - Production ready databases...
+ak8sdb/kubedb-autoscaler            v2025.12.15     v2025.12.15   KubeDB Autoscaler by AppsCode - Autoscale KubeD...
+ak8sdb/kubedb-catalog               v2025.12.15     v2025.12.15   KubeDB Catalog by AppsCode - Catalog for databa...
+ak8sdb/kubedb-community             v2025.12.15     v2025.12.15   KubeDB Community by AppsCode - Community featur...
+ak8sdb/kubedb-crds                  v2025.12.15     v2025.12.15   KubeDB and Stash crds
+ak8sdb/kubedb-enterprise            v2025.12.15     v2025.12.15   KubeDB Enterprise by AppsCode - Enterprise feat...
 
 # enable both Elasticsearch and MongoDB
 $ helm upgrade -i kubedb ak8sdb/kubedb \
@@ -33,7 +33,7 @@ $ helm upgrade -i kubedb ak8sdb/kubedb \
 
 $ helm ls
 NAME  	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
-kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2025.9.26	v2025.9.26
+kubedb	default  	1       	2021-03-21 18:09:41.707580398 -0700 PDT	deployed	kubedb-v2025.12.15	v2025.12.15
 
 $ kubectl get pods
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -55,7 +55,7 @@ kubedb-stash-community-688658484b-w5dpd     2/2     Running   0          2m6s
 go run ./hack/fmt/main.go
 
 make update-charts CHART_VERSION=$VERSION CHART_REGISTRY=appscode
-helm dependency build charts/kubedb
+helm dependency update charts/kubedb
 ./hack/scripts/update-repo.sh
 ```
 

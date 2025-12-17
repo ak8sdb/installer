@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add appscode https://raw.githubusercontent.com/ak8sdb/installer/master/stable
 $ helm repo update
-$ helm search repo appscode/kubedb-community --version=v2025.9.26
-$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.9.26
+$ helm search repo appscode/kubedb-community --version=v2025.12.15
+$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.12.15
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys a KubeDB Community operator on a [Kubernetes](http://kubernet
 To install/upgrade the chart with the release name `kubedb-community`:
 
 ```bash
-$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.9.26
+$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.12.15
 ```
 
 The command deploys a KubeDB Community operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -54,7 +54,7 @@ The following table lists the configurable parameters of the `kubedb-community` 
 | registryFQDN                          | Docker registry fqdn used to pull KubeDB related images Set this to use docker registry hosted at ${registryFQDN}/${registry}/${image}                                                                                                                                                                                                                                        | <code>""</code>                           |
 | operator.registry                     | Docker registry used to pull KubeDB operator image                                                                                                                                                                                                                                                                                                                            | <code>ghcr.io/ak8sdb</code>               |
 | operator.repository                   | KubeDB operator container image                                                                                                                                                                                                                                                                                                                                               | <code>operator</code>                     |
-| operator.tag                          | KubeDB operator container image tag                                                                                                                                                                                                                                                                                                                                           | <code>v2025.9.26</code>                   |
+| operator.tag                          | KubeDB operator container image tag                                                                                                                                                                                                                                                                                                                                           | <code>v2025.12.15</code>                  |
 | operator.resources                    | Compute Resources required by the operator container                                                                                                                                                                                                                                                                                                                          | <code>{}</code>                           |
 | operator.securityContext              | requests: cpu: 100m memory: 128Mi Security options the operator container should run with                                                                                                                                                                                                                                                                                     | <code>{}</code>                           |
 | cleaner.registry                      | Docker registry used to pull Webhook cleaner image                                                                                                                                                                                                                                                                                                                            | <code>ghcr.io/appscode</code>             |
@@ -98,12 +98,12 @@ The following table lists the configurable parameters of the `kubedb-community` 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.9.26 --set replicaCount=1
+$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.12.15 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.9.26 --values values.yaml
+$ helm upgrade -i kubedb-community appscode/kubedb-community -n kubedb --create-namespace --version=v2025.12.15 --values values.yaml
 ```
