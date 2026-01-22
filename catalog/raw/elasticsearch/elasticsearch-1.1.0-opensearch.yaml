@@ -5,13 +5,13 @@ metadata:
 spec:
   authPlugin: OpenSearch
   db:
-    image: opensearchproject/opensearch:1.1.0
+    image: ghcr.io/appscode-images/opensearch:1.1.0
   distribution: OpenSearch
   exporter:
-    image: prometheuscommunity/elasticsearch-exporter:v1.3.0
+    image: prometheuscommunity/elasticsearch-exporter:v1.10.0
   initContainer:
     image: tianon/toybox:0.8.4
-    yqImage: kubedb/elasticsearch-init:1.1.0-opensearch-v2021.11.10
+    yqImage: ghcr.io/kubedb/elasticsearch-init:1.1-opensearch-v2026.1.15
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   stash:

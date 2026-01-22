@@ -1,18 +1,17 @@
 apiVersion: catalog.kubedb.com/v1alpha1
 kind: ElasticsearchVersion
 metadata:
-  name: xpack-8.6.2
+  name: xpack-8.19.7
 spec:
   authPlugin: X-Pack
   db:
-    image: elasticsearch:8.6.2
-  deprecated: true
+    image: ghcr.io/appscode-images/elastic:8.19.7
   distribution: ElasticStack
   exporter:
-    image: prometheuscommunity/elasticsearch-exporter:v1.3.0
+    image: prometheuscommunity/elasticsearch-exporter:v1.10.0
   initContainer:
     image: tianon/toybox:0.8.4
-    yqImage: ghcr.io/kubedb/elasticsearch-init:8.6.2-xpack-v2023.03.16
+    yqImage: ghcr.io/kubedb/elasticsearch-init:8.14.1-xpack-v2024.06.26
   podSecurityPolicies:
     databasePolicyName: elasticsearch-db
   securityContext:
@@ -23,11 +22,11 @@ spec:
       backupTask:
         name: elasticsearch-backup-8.2.0
         params:
-        - name: args
-          value: --match=^(?![.])(?!apm-agent-configuration)(?!kubedb-system).+
+          - name: args
+            value: --match=^(?![.])(?!apm-agent-configuration)(?!kubedb-system).+
       restoreTask:
         name: elasticsearch-restore-8.2.0
         params:
-        - name: args
-          value: --match=^(?![.])(?!apm-agent-configuration)(?!kubedb-system).+
-  version: 8.6.2
+          - name: args
+            value: --match=^(?![.])(?!apm-agent-configuration)(?!kubedb-system).+
+  version: 8.19.7
