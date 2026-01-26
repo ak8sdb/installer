@@ -1,0 +1,21 @@
+dependencies:
+- name: kubedb-catalog
+  repository: file://../kubedb-catalog
+  version: v2025.12.15
+- name: kubedb-community
+  repository: file://../kubedb-community
+  version: v2025.12.15
+- name: kubedb-enterprise
+  repository: file://../kubedb-enterprise
+  version: v2025.12.15
+- name: kubedb-autoscaler
+  repository: file://../kubedb-autoscaler
+  version: v2025.12.15
+- name: stash-community
+  repository: file://../stash-community
+  version: v2025.12.15
+- name: stash-catalog
+  repository: file://../stash-catalog
+  version: v2025.12.15
+digest: sha256:21e7a98d155348a79d72463ee302d2e6339e72c45402b013684b63f90b510eae
+generated: "2025-12-17T19:02:48.552162+06:00"
