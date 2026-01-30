@@ -1,0 +1,33 @@
+{{ $featureGates := .Values.featureGates }}
+{{- if .Values.global }}
+  {{ $featureGates = mergeOverwrite dict .Values.featureGates .Values.global.featureGates }}
+{{- end }}
+
+{{ if $featureGates.MongoDB }}
+
+apiVersion: catalog.kubedb.com/v1alpha1
+kind: MongoDBVersion
+metadata:
+  name: 'percona-4.0.10'
+  labels:
+    {{- include "kubedb-catalog.labels" . | nindent 4 }}
+spec:
+  db:
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "percona/percona-server-mongodb") $) }}:4.0.10'
+  distribution: Percona
+  exporter:
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/mongodb_exporter") $) }}:v0.20.4'
+  initContainer:
+    image: '{{ include "image.ghcr" (merge (dict "_repo" "ak8sdb/mongodb-init") $) }}:4.1-v6'
+  podSecurityPolicies:
+    databasePolicyName: mongodb-db
+  replicationModeDetector:
+    image: '{{ include "image.dockerHub" (merge (dict "_repo" "kubedb/replication-mode-detector") $) }}:v0.11.0'
+  stash:
+    addon:
+      backupTask:
+        name: mongodb-backup-4.0.11
+      restoreTask:
+        name: mongodb-restore-4.0.11
+  version: 4.0.10
+{{ end }}

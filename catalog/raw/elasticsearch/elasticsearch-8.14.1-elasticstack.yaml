@@ -8,7 +8,7 @@ spec:
     image: ghcr.io/appscode-images/elastic:8.14.1
   distribution: ElasticStack
   exporter:
-    image: prometheuscommunity/elasticsearch-exporter:v1.3.0
+    image: prometheuscommunity/elasticsearch-exporter:v1.10.0
   initContainer:
     image: tianon/toybox:0.8.4
     yqImage: ghcr.io/kubedb/elasticsearch-init:8.14.1-xpack-v2024.06.26
